@@ -13,6 +13,13 @@
 - 💬 Ask me about Java, SpringBoot, JavaScript, Vue.js, OracleDatabase, AWS, Azure
 
 <br>
+<h3 align="left">Are you bored? Then go ahead and play!</h3>
+<a href="https://ultimania.github.io/tetris/" target="blank">
+  <img align="center" src="https://user-images.githubusercontent.com/23427401/200989378-1e120b7d-0371-48da-8830-971b22054150.png" alt="play tetris!!" height="200" width="100" />
+</a>
+<br>
+
+<br>
 <h3 align="left">Connect with me:</h3>
 <p align="left">
   <a href=https://www.linkedin.com/in/takumi-fukaya-529627256/" target="blank">
@@ -28,6 +35,8 @@
   <a href="https://git-scm.com/" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/git-scm/git-scm-icon.svg" alt="git" width="40" height="40"/> </a> 
   <a href="https://www.w3.org/html/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/html5/html5-original-wordmark.svg" alt="html5" width="40" height="40"/> </a> 
   <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg" alt="javascript" width="40" height="40"/> </a> 
+<a href="https://www.java.com/ja/" target="_blank" rel="noreferrer"> <img src="https://github.com/devicons/devicon/blob/master/icons/java/java-original-wordmark.svg" alt="java" width="40" height="40"/> </a>
+<a href="https://spring.io/" target="_blank" rel="noreferrer"> <img src="https://github.com/devicons/devicon/blob/master/icons/spring/spring-original-wordmark.svg" alt="aws" width="40" height="40"/> </a>
   <a href="https://aws.amazon.com/jp/" target="_blank" rel="noreferrer"> <img src="https://github.com/devicons/devicon/blob/master/icons/amazonwebservices/amazonwebservices-original-wordmark.svg" alt="aws" width="40" height="40"/> </a>
   <a href="https://www.microsoft.com/en-us/sql-server" target="_blank" rel="noreferrer"> <img src="https://www.svgrepo.com/show/303229/microsoft-sql-server-logo.svg" alt="mssql" width="40" height="40"/> </a> 
 <a href="https://azure.microsoft.com/ja-jp/" target="_blank" rel="noreferrer"> <img src="https://github.com/devicons/devicon/blob/master/icons/azure/azure-original-wordmark.svg" alt="azure" width="40" height="40"/> </a> 
