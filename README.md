@@ -13,7 +13,7 @@
 - 💬 Ask me about Java, SpringBoot, JavaScript, Vue.js, OracleDatabase, AWS, Azure
 
 <br>
-<h3 align="left">Are you bored? Then go ahead and play!</h3>
+<h3 align="left">Are you bored? Then go ahead and play😎</h3>
 <a href="https://ultimania.github.io/tetris/" target="blank">
   <img align="center" src="https://user-images.githubusercontent.com/23427401/200989378-1e120b7d-0371-48da-8830-971b22054150.png" alt="play tetris!!" height="200" width="100" />
 </a>
