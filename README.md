@@ -8,7 +8,6 @@
 
 <br>
 
-- 🔭 I’m currently working on [Si&C](https://www.sysj.co.jp/)
 - 🌱 I’m currently learning JavaScript
 - 💬 Ask me about Java, SpringBoot, JavaScript, Vue.js, OracleDatabase, AWS, Azure
 
