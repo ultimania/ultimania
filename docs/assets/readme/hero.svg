@@ -1,0 +1,122 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 460" font-family="'Helvetica Neue', Arial, 'Noto Sans JP', sans-serif" role="img" aria-label="Takumi Fukaya — Zero Trust Security Architect / AI Agent Systems Builder">
+  <defs>
+    <linearGradient id="aur" x1="0%" y1="0%" x2="100%" y2="30%">
+      <stop offset="0%" stop-color="#22d3ee"/>
+      <stop offset="55%" stop-color="#a78bfa"/>
+      <stop offset="100%" stop-color="#f472b6"/>
+    </linearGradient>
+    <radialGradient id="b1" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#22d3ee" stop-opacity=".55"/>
+      <stop offset="100%" stop-color="#22d3ee" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="b2" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#a78bfa" stop-opacity=".5"/>
+      <stop offset="100%" stop-color="#a78bfa" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="b3" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#f472b6" stop-opacity=".4"/>
+      <stop offset="100%" stop-color="#f472b6" stop-opacity="0"/>
+    </radialGradient>
+    <clipPath id="frame"><rect width="1200" height="460" rx="18"/></clipPath>
+    <pattern id="grid" width="48" height="48" patternUnits="userSpaceOnUse">
+      <path d="M48 0H0V48" fill="none" stroke="#ffffff" stroke-opacity=".035" stroke-width="1"/>
+    </pattern>
+    <style>
+      .mono{font-family:'SF Mono','Cascadia Code','JetBrains Mono',Menlo,Consolas,'Courier New',monospace;}
+      .blob{transform-box:fill-box;transform-origin:center;}
+      .b1{animation:drift1 16s ease-in-out infinite alternate;}
+      .b2{animation:drift2 20s ease-in-out infinite alternate;}
+      .b3{animation:drift3 18s ease-in-out infinite alternate;}
+      @keyframes drift1{from{transform:translate(0,0) scale(1);}to{transform:translate(140px,60px) scale(1.25);}}
+      @keyframes drift2{from{transform:translate(0,0) scale(1.15);}to{transform:translate(-160px,-40px) scale(.95);}}
+      @keyframes drift3{from{transform:translate(0,0) scale(1);}to{transform:translate(-90px,70px) scale(1.3);}}
+      .cursor{animation:blink 1.1s step-end infinite;}
+      @keyframes blink{50%{opacity:0;}}
+      .rise{opacity:0;transform:translateY(26px);animation:rise 1s cubic-bezier(.16,1,.3,1) forwards;}
+      .d1{animation-delay:.15s;} .d2{animation-delay:.3s;} .d3{animation-delay:.55s;}
+      .d4{animation-delay:.7s;} .d5{animation-delay:.85s;} .d6{animation-delay:1s;} .d7{animation-delay:1.15s;}
+      @keyframes rise{to{opacity:1;transform:translateY(0);}}
+      .role{opacity:0;animation:roles 16s linear infinite;}
+      .r2{animation-delay:4s;} .r3{animation-delay:8s;} .r4{animation-delay:12s;}
+      @keyframes roles{0%{opacity:0;}2%{opacity:1;}23%{opacity:1;}25%{opacity:0;}100%{opacity:0;}}
+      .scan{animation:scan 7s linear infinite;}
+      @keyframes scan{from{transform:translateY(-20px);}to{transform:translateY(480px);}}
+      .pulse{animation:pulse 3.2s ease-in-out infinite;}
+      @keyframes pulse{0%,100%{opacity:.55;}50%{opacity:1;}}
+      @media (prefers-reduced-motion: reduce){
+        .b1,.b2,.b3,.cursor,.scan,.pulse{animation:none;}
+        .rise{animation:none;opacity:1;transform:none;}
+        .role{animation:none;opacity:0;}
+        .r1{opacity:1;}
+      }
+    </style>
+  </defs>
+
+  <g clip-path="url(#frame)">
+    <rect width="1200" height="460" fill="#04050a"/>
+    <g class="blob b1"><circle cx="180" cy="110" r="320" fill="url(#b1)"/></g>
+    <g class="blob b2"><circle cx="1020" cy="120" r="360" fill="url(#b2)"/></g>
+    <g class="blob b3"><circle cx="640" cy="470" r="340" fill="url(#b3)"/></g>
+    <rect width="1200" height="460" fill="url(#grid)"/>
+    <rect width="1200" height="460" fill="#04050a" opacity=".35"/>
+
+    <!-- kanji watermark -->
+    <text x="1155" y="392" text-anchor="end" font-size="380" font-weight="900"
+          fill="none" stroke="#ffffff" stroke-opacity=".07" stroke-width="1.5">巧</text>
+
+    <!-- scanline -->
+    <rect class="scan" x="0" y="0" width="1200" height="2" fill="#22d3ee" opacity=".06"/>
+
+    <!-- HUD corner brackets -->
+    <path d="M28 52V28h24M1172 28h-24M28 408v24h24M1172 432h-24" transform="translate(0,0)"
+          fill="none" stroke="#22d3ee" stroke-opacity=".5" stroke-width="2"/>
+    <path d="M1148 28h24v24M1148 432h24v-24" fill="none" stroke="#22d3ee" stroke-opacity=".5" stroke-width="2"/>
+
+    <!-- terminal prompt -->
+    <text class="mono rise d1" x="72" y="96" font-size="17" fill="#22d3ee" letter-spacing="1">$ whoami</text>
+    <rect class="cursor" x="162" y="82" width="9" height="17" fill="#22d3ee"/>
+
+    <!-- name -->
+    <text class="rise d2" x="66" y="204" font-size="96" font-weight="800" letter-spacing="2" fill="#eef2f8">TAKUMI</text>
+    <text class="rise d3" x="66" y="298" font-size="96" font-weight="800" letter-spacing="2" fill="url(#aur)">FUKAYA</text>
+
+    <!-- rotating roles -->
+    <g class="mono" font-size="19" letter-spacing="2">
+      <text x="72" y="348" fill="#5b6577">&gt;</text>
+      <text class="role r1" x="94" y="348" fill="#22d3ee">ZERO TRUST SECURITY ARCHITECT</text>
+      <text class="role r2" x="94" y="348" fill="#22d3ee">AI AGENT SYSTEMS BUILDER</text>
+      <text class="role r3" x="94" y="348" fill="#22d3ee">TECH LEAD × PROJECT RESCUER</text>
+      <text class="role r4" x="94" y="348" fill="#22d3ee">0→1 PRODUCT FOUNDER</text>
+    </g>
+
+    <!-- divider -->
+    <rect class="rise d4" x="66" y="376" width="1068" height="1" fill="#ffffff" opacity=".12"/>
+
+    <!-- stats strip -->
+    <g class="mono" font-size="15">
+      <g class="rise d4">
+        <text x="72" y="414" fill="#22d3ee" font-weight="700" font-size="22">10+</text>
+        <text x="122" y="414" fill="#8e99ad">yrs shipping production</text>
+      </g>
+      <g class="rise d5">
+        <text x="372" y="414" fill="#22d3ee" font-weight="700" font-size="22">16+</text>
+        <text x="422" y="414" fill="#8e99ad">projects delivered</text>
+      </g>
+      <g class="rise d6">
+        <text x="640" y="414" fill="#22d3ee" font-weight="700" font-size="22">4</text>
+        <text x="668" y="414" fill="#8e99ad">industries, national scale</text>
+      </g>
+      <g class="rise d7">
+        <text x="946" y="414" fill="#22d3ee" font-weight="700" font-size="22">5</text>
+        <text x="974" y="414" fill="#8e99ad">-repo AI agent platform</text>
+      </g>
+    </g>
+
+    <!-- status dot -->
+    <circle class="pulse" cx="1124" cy="90" r="5" fill="#22d3ee"/>
+    <text class="mono pulse" x="1108" y="95" text-anchor="end" font-size="12" fill="#8e99ad" letter-spacing="2">SYSTEM ONLINE</text>
+
+    <!-- frame border -->
+    <rect x=".5" y=".5" width="1199" height="459" rx="18" fill="none" stroke="#ffffff" stroke-opacity=".1"/>
+  </g>
+</svg>

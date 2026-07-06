@@ -9,6 +9,9 @@
 <meta property="og:description" content="10 years shipping and rescuing enterprise systems across automotive, insurance, legal, and government sectors. Now building AI agent operating systems on the side.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://ultimania.github.io/ultimania/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
 <script>
 (function(){
   try{
@@ -23,290 +26,431 @@
 </script>
 <style>
   :root{
-    --bg:#080a0f;
-    --bg2:#0d1017;
-    --card:#11151d;
-    --line:#1e2530;
-    --fg:#e6edf3;
-    --fg-dim:#8b96a5;
-    --accent:#5eead4;
-    --accent2:#7dd3fc;
-    --warn:#fbbf24;
-    --mono: ui-monospace, "SF Mono", "Cascadia Code", "JetBrains Mono", Menlo, Consolas, monospace;
-    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "Hiragino Sans", "Noto Sans JP", sans-serif;
+    --bg:#04050a;
+    --bg2:#080b14;
+    --fg:#eef2f8;
+    --dim:#8e99ad;
+    --dimmer:#5b6577;
+    --c1:#22d3ee;   /* cyan   */
+    --c2:#a78bfa;   /* violet */
+    --c3:#f472b6;   /* pink   */
+    --line:rgba(255,255,255,.08);
+    --card:rgba(255,255,255,.028);
+    --mono:"JetBrains Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    --disp:"Space Grotesk","Noto Sans JP",-apple-system,BlinkMacSystemFont,sans-serif;
+    --sans:"Noto Sans JP",-apple-system,BlinkMacSystemFont,"Segoe UI","Hiragino Sans",sans-serif;
   }
-  *{box-sizing:border-box; margin:0; padding:0;}
+  *{box-sizing:border-box;margin:0;padding:0;}
   html{scroll-behavior:smooth;}
-  html[data-lang="en"] .lang-ja{display:none;}
-  html[data-lang="ja"] .lang-en{display:none;}
+  html[data-lang="en"] .lang-ja{display:none !important;}
+  html[data-lang="ja"] .lang-en{display:none !important;}
   body{
-    background:
-      radial-gradient(1200px 600px at 15% -10%, rgba(94,234,212,0.08), transparent 60%),
-      radial-gradient(900px 500px at 100% 0%, rgba(125,211,252,0.06), transparent 60%),
-      var(--bg);
+    background:var(--bg);
     color:var(--fg);
     font-family:var(--sans);
-    line-height:1.7;
+    line-height:1.75;
     overflow-x:hidden;
   }
-  a{color:var(--accent2);}
-  .wrap{max-width:1040px; margin:0 auto; padding:0 24px;}
-  ::selection{background:rgba(94,234,212,0.35);}
+  ::selection{background:rgba(34,211,238,.35);}
+  a{color:inherit;}
+  .wrap{max-width:1160px;margin:0 auto;padding:0 28px;}
+  @media(max-width:640px){.wrap{padding:0 20px;}}
 
-  /* ---------- nav ---------- */
-  nav{
-    position:sticky; top:0; z-index:50;
-    background:rgba(8,10,15,0.75);
-    backdrop-filter:blur(10px);
-    border-bottom:1px solid var(--line);
+  /* ================= WebGL background ================= */
+  #gl{position:fixed;inset:0;width:100%;height:100%;z-index:-3;}
+  .bg-shade{position:fixed;inset:0;z-index:-2;pointer-events:none;
+    background:
+      linear-gradient(180deg, rgba(4,5,10,.22) 0%, rgba(4,5,10,.58) 42%, rgba(4,5,10,.78) 100%);
   }
-  nav .wrap{display:flex; align-items:center; justify-content:space-between; height:56px; gap:16px;}
-  nav .brand{font-family:var(--mono); font-size:14px; color:var(--accent); white-space:nowrap;}
-  nav .links{display:flex; align-items:center; gap:20px; font-size:13px; font-family:var(--mono);}
-  nav .links a{color:var(--fg-dim); text-decoration:none;}
-  nav .links a:hover{color:var(--accent);}
-  .lang-toggle{display:flex; border:1px solid var(--line); border-radius:7px; overflow:hidden; font-family:var(--mono); font-size:11px;}
-  .lang-toggle button{
-    background:transparent; border:none; color:var(--fg-dim); padding:6px 10px; cursor:pointer; font-family:inherit; font-size:inherit;
+  .grain{position:fixed;inset:-100%;z-index:120;pointer-events:none;opacity:.05;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.8'/%3E%3C/svg%3E");
+    animation:grain 8s steps(10) infinite;
   }
-  .lang-toggle button.active{background:var(--accent); color:#04211c; font-weight:700;}
-  @media (max-width:640px){ nav .links a:not(.lang-toggle){display:none;} }
+  @keyframes grain{
+    0%,100%{transform:translate(0,0)}10%{transform:translate(-5%,-8%)}20%{transform:translate(-12%,4%)}
+    30%{transform:translate(6%,-14%)}40%{transform:translate(-4%,12%)}50%{transform:translate(-12%,6%)}
+    60%{transform:translate(12%,0)}70%{transform:translate(0,10%)}80%{transform:translate(-8%,-2%)}90%{transform:translate(8%,4%)}
+  }
 
-  /* ---------- hero ---------- */
-  header.hero{padding:96px 0 64px;}
-  .prompt{font-family:var(--mono); color:var(--accent); font-size:14px; margin-bottom:18px;}
-  .prompt::after{content:"█"; animation:blink 1.1s step-end infinite; margin-left:2px;}
-  @keyframes blink{50%{opacity:0;}}
+  /* ================= preloader ================= */
+  #boot{
+    position:fixed;inset:0;z-index:200;background:var(--bg);
+    display:flex;align-items:center;justify-content:center;
+    transition:opacity .6s ease, visibility .6s;
+  }
+  #boot.done{opacity:0;visibility:hidden;}
+  #boot .term{font-family:var(--mono);font-size:clamp(12px,1.6vw,14px);color:var(--dim);min-width:min(520px,86vw);}
+  #boot .term .ln{white-space:pre;min-height:1.7em;}
+  #boot .term .ok{color:var(--c1);}
+  #boot .term .caret::after{content:"█";color:var(--c1);animation:blink 1s step-end infinite;}
+  @keyframes blink{50%{opacity:0}}
+
+  /* ================= custom cursor ================= */
+  @media(pointer:fine){
+    .cursor-dot,.cursor-ring{position:fixed;top:0;left:0;z-index:150;pointer-events:none;border-radius:50%;
+      transform:translate(-50%,-50%);}
+    .cursor-dot{width:6px;height:6px;background:var(--c1);}
+    .cursor-ring{width:36px;height:36px;border:1px solid rgba(34,211,238,.5);
+      transition:width .25s ease,height .25s ease,border-color .25s ease,background .25s ease;}
+    .cursor-ring.hover{width:64px;height:64px;border-color:rgba(167,139,250,.8);background:rgba(167,139,250,.08);}
+  }
+  .cursor-dot,.cursor-ring{display:none;}
+  html.has-cursor .cursor-dot,html.has-cursor .cursor-ring{display:block;}
+
+  /* ================= scroll progress ================= */
+  #scroll-bar{position:fixed;top:0;left:0;height:2px;width:0%;z-index:110;
+    background:linear-gradient(90deg,var(--c1),var(--c2),var(--c3));
+    box-shadow:0 0 12px rgba(34,211,238,.7);}
+
+  /* ================= nav ================= */
+  nav{position:fixed;top:0;left:0;right:0;z-index:100;
+    background:rgba(4,5,10,.55);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+    border-bottom:1px solid transparent;transition:border-color .3s ease;}
+  nav.scrolled{border-bottom-color:var(--line);}
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;height:60px;gap:16px;}
+  nav .brand{font-family:var(--mono);font-size:13px;letter-spacing:.06em;color:var(--fg);text-decoration:none;white-space:nowrap;}
+  nav .brand b{color:var(--c1);}
+  nav .links{display:flex;align-items:center;gap:22px;font-family:var(--mono);font-size:12.5px;}
+  nav .links > a{color:var(--dim);text-decoration:none;position:relative;padding:4px 0;}
+  nav .links > a::after{content:"";position:absolute;left:0;bottom:0;width:0;height:1px;background:var(--c1);transition:width .25s ease;}
+  nav .links > a:hover{color:var(--fg);}
+  nav .links > a:hover::after{width:100%;}
+  .kbd-hint{display:flex;align-items:center;gap:6px;font-family:var(--mono);font-size:11px;color:var(--dimmer);
+    border:1px solid var(--line);border-radius:7px;padding:5px 10px;cursor:pointer;background:transparent;transition:border-color .2s,color .2s;}
+  .kbd-hint:hover{border-color:var(--c1);color:var(--c1);}
+  .kbd-hint kbd{font-family:inherit;background:rgba(255,255,255,.06);border-radius:4px;padding:1px 5px;font-size:10px;}
+  .lang-toggle{display:flex;border:1px solid var(--line);border-radius:8px;overflow:hidden;font-family:var(--mono);font-size:11px;}
+  .lang-toggle button{background:transparent;border:none;color:var(--dim);padding:6px 11px;cursor:pointer;font-family:inherit;font-size:inherit;transition:all .2s;}
+  .lang-toggle button.active{background:var(--c1);color:#03191d;font-weight:700;}
+  @media(max-width:800px){nav .links > a{display:none;} .kbd-hint{display:none;}}
+
+  /* ================= hero ================= */
+  header.hero{min-height:100svh;display:flex;flex-direction:column;justify-content:center;position:relative;padding:140px 0 150px;overflow:hidden;}
+  .hero .kanji{
+    position:absolute;right:-2vw;top:50%;transform:translateY(-52%);
+    font-family:var(--sans);font-weight:900;font-size:clamp(280px,44vw,640px);line-height:1;
+    color:transparent;-webkit-text-stroke:1px rgba(255,255,255,.06);
+    user-select:none;pointer-events:none;z-index:-1;
+  }
+  .vertical-jp{
+    position:absolute;left:calc(50% + 600px);top:180px;
+    writing-mode:vertical-rl;font-family:var(--sans);font-weight:500;
+    font-size:13px;letter-spacing:.5em;color:var(--dimmer);
+  }
+  @media(max-width:1280px){.vertical-jp{display:none;}}
+  .prompt{font-family:var(--mono);color:var(--c1);font-size:14px;margin-bottom:26px;letter-spacing:.04em;}
+  .prompt::after{content:"█";animation:blink 1.1s step-end infinite;margin-left:3px;}
   h1.name{
-    font-size:clamp(34px,6vw,58px);
-    font-weight:800;
-    letter-spacing:-0.02em;
-    line-height:1.1;
-    background:linear-gradient(120deg, var(--fg) 30%, var(--accent) 70%, var(--accent2));
-    -webkit-background-clip:text; background-clip:text; color:transparent;
+    font-family:var(--disp);
+    font-size:clamp(52px,10vw,128px);
+    font-weight:700;letter-spacing:-.03em;line-height:.98;
+    margin-bottom:10px;
   }
-  .tagline{font-size:clamp(16px,2.4vw,20px); color:var(--fg-dim); max-width:700px; margin-top:18px;}
-  .tagline b{color:var(--fg); font-weight:600;}
+  h1.name .row{display:block;overflow:hidden;}
+  h1.name .row span{display:inline-block;transform:translateY(110%);animation:riseUp 1s cubic-bezier(.16,1,.3,1) forwards;}
+  h1.name .row:nth-child(2) span{animation-delay:.12s;
+    background:linear-gradient(100deg,var(--c1),var(--c2) 55%,var(--c3));
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+    background-size:200% auto;animation:riseUp 1s cubic-bezier(.16,1,.3,1) .12s forwards, sheen 6s linear 1.2s infinite;
+  }
+  @keyframes riseUp{to{transform:translateY(0);}}
+  @keyframes sheen{to{background-position:200% center;}}
+  .role-line{
+    font-family:var(--mono);font-size:clamp(15px,2.4vw,22px);
+    color:var(--fg);margin:28px 0 6px;min-height:1.8em;letter-spacing:.01em;
+  }
+  .role-line .pre{color:var(--dimmer);}
+  .role-line .scramble{color:var(--c1);}
+  .tagline{font-size:clamp(15px,1.9vw,18px);color:var(--dim);max-width:680px;margin-top:14px;}
+  .tagline b{color:var(--fg);font-weight:600;}
 
-  .stats{display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--line); border:1px solid var(--line); border-radius:10px; overflow:hidden; margin-top:40px;}
-  .stat{background:var(--card); padding:18px 14px; text-align:center;}
-  .stat .num{font-family:var(--mono); font-size:24px; font-weight:700; color:var(--accent);}
-  .stat .label{font-size:11px; color:var(--fg-dim); margin-top:4px; letter-spacing:0.02em;}
-  @media (max-width:640px){.stats{grid-template-columns:repeat(2,1fr);}}
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);
+    border:1px solid var(--line);border-radius:14px;overflow:hidden;margin-top:56px;max-width:860px;
+    backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);}
+  .stat{background:rgba(8,11,20,.72);padding:22px 16px;position:relative;overflow:hidden;}
+  .stat::before{content:"";position:absolute;top:0;left:0;width:100%;height:2px;
+    background:linear-gradient(90deg,var(--c1),transparent);opacity:0;transition:opacity .3s;}
+  .stat:hover::before{opacity:1;}
+  .stat .num{font-family:var(--disp);font-size:clamp(24px,3.4vw,34px);font-weight:700;color:var(--fg);letter-spacing:-.02em;}
+  .stat .num .unit{font-size:.5em;color:var(--c1);font-family:var(--mono);margin-left:2px;}
+  .stat .label{font-size:11.5px;color:var(--dim);margin-top:6px;line-height:1.5;}
+  @media(max-width:680px){.stats{grid-template-columns:repeat(2,1fr);}}
 
-  /* ---------- section shell ---------- */
-  section{padding:64px 0;}
-  .section-head{display:flex; align-items:baseline; gap:12px; margin-bottom:36px;}
-  .section-head .idx{font-family:var(--mono); color:var(--fg-dim); font-size:13px;}
-  .section-head h2{font-size:clamp(22px,3vw,30px); font-weight:700;}
-  .section-lead{color:var(--fg-dim); max-width:700px; margin:-24px 0 36px;}
+  .scroll-cue{position:absolute;bottom:34px;left:50%;transform:translateX(-50%);
+    font-family:var(--mono);font-size:10px;letter-spacing:.35em;color:var(--dimmer);text-transform:uppercase;
+    display:flex;flex-direction:column;align-items:center;gap:10px;}
+  .scroll-cue::after{content:"";width:1px;height:44px;background:linear-gradient(180deg,var(--c1),transparent);
+    animation:cueDrop 1.8s ease-in-out infinite;}
+  @keyframes cueDrop{0%{transform:scaleY(0);transform-origin:top;}45%{transform:scaleY(1);transform-origin:top;}55%{transform:scaleY(1);transform-origin:bottom;}100%{transform:scaleY(0);transform-origin:bottom;}}
 
-  /* ---------- career cards ---------- */
-  .career{display:flex; flex-direction:column; gap:0; border-left:2px solid var(--line); margin-left:8px;}
-  .job{position:relative; padding:0 0 34px 28px;}
-  .job::before{content:""; position:absolute; left:-7px; top:4px; width:12px; height:12px; border-radius:50%; background:var(--bg); border:2px solid var(--accent);}
+  /* ================= section shell ================= */
+  section{padding:130px 0;position:relative;}
+  .sec-head{position:relative;margin-bottom:64px;}
+  .sec-head .ghost{
+    position:absolute;left:-8px;top:50%;transform:translateY(-58%);
+    font-family:var(--disp);font-weight:700;font-size:clamp(110px,16vw,200px);line-height:1;
+    color:transparent;-webkit-text-stroke:1px rgba(255,255,255,.055);user-select:none;pointer-events:none;
+  }
+  .sec-head .idx{font-family:var(--mono);font-size:12px;color:var(--c1);letter-spacing:.3em;display:block;margin-bottom:10px;}
+  .sec-head h2{font-family:var(--disp);font-size:clamp(30px,5vw,52px);font-weight:700;letter-spacing:-.02em;line-height:1.15;}
+  .sec-lead{color:var(--dim);max-width:720px;margin-top:20px;font-size:15px;}
+
+  /* ================= career ================= */
+  #career .timeline{position:relative;margin-left:6px;}
+  #career .rail{position:absolute;left:0;top:0;bottom:0;width:2px;background:var(--line);}
+  #career .rail .fill{position:absolute;top:0;left:0;width:100%;height:0%;
+    background:linear-gradient(180deg,var(--c1),var(--c2));box-shadow:0 0 10px rgba(34,211,238,.5);}
+  .job{position:relative;padding:0 0 64px 44px;}
   .job:last-child{padding-bottom:0;}
-  .job .period{font-family:var(--mono); font-size:12px; color:var(--accent2);}
-  .job h3{font-size:17px; margin:4px 0 8px; font-weight:700;}
-  .job p{color:var(--fg-dim); font-size:14.5px;}
-  .job .tags{margin-top:10px; display:flex; flex-wrap:wrap; gap:6px;}
-  .tag{font-family:var(--mono); font-size:11px; padding:3px 8px; border:1px solid var(--line); border-radius:5px; color:var(--fg-dim); background:rgba(255,255,255,0.02);}
+  .job .dot{position:absolute;left:-6px;top:8px;width:14px;height:14px;border-radius:50%;
+    background:var(--bg);border:2px solid var(--dimmer);transition:all .4s ease;z-index:1;}
+  .job.lit .dot{border-color:var(--c1);box-shadow:0 0 14px rgba(34,211,238,.8);background:rgba(34,211,238,.25);}
+  .job .period{font-family:var(--mono);font-size:12.5px;color:var(--c2);letter-spacing:.08em;}
+  .job .flag{display:inline-block;font-family:var(--mono);font-size:10px;letter-spacing:.14em;color:var(--c3);
+    border:1px solid rgba(244,114,182,.35);border-radius:5px;padding:2px 8px;margin-left:10px;vertical-align:2px;
+    text-transform:uppercase;}
+  .job h3{font-family:var(--disp);font-size:clamp(19px,2.6vw,26px);font-weight:600;margin:10px 0 12px;letter-spacing:-.01em;line-height:1.35;}
+  .job p{color:var(--dim);font-size:14.5px;max-width:760px;}
+  .job .tags{margin-top:16px;display:flex;flex-wrap:wrap;gap:7px;}
+  .tag{font-family:var(--mono);font-size:11px;padding:4px 10px;border:1px solid var(--line);border-radius:6px;
+    color:var(--dim);background:rgba(255,255,255,.02);transition:all .2s;}
+  .tag:hover{border-color:rgba(34,211,238,.5);color:var(--c1);}
 
-  /* ---------- project grid ---------- */
-  .grid{display:grid; grid-template-columns:repeat(2,1fr); gap:16px;}
-  @media (max-width:760px){.grid{grid-template-columns:1fr;}}
-  .proj{
-    background:var(--card); border:1px solid var(--line); border-radius:12px; padding:22px;
-    transition:transform .15s ease, border-color .15s ease;
-  }
-  .proj:hover{transform:translateY(-3px); border-color:rgba(94,234,212,0.4);}
-  .proj .k{font-family:var(--mono); font-size:11px; color:var(--warn); letter-spacing:0.05em;}
-  .proj h3{font-size:18px; margin:6px 0 10px;}
-  .proj p{color:var(--fg-dim); font-size:14px;}
-  .proj ul{margin-top:12px; padding-left:18px; color:var(--fg-dim); font-size:13.5px;}
-  .proj ul li{margin-bottom:4px;}
-  .proj .tags{margin-top:14px; display:flex; flex-wrap:wrap; gap:6px;}
-  .proj .link{display:inline-block; margin-top:14px; font-family:var(--mono); font-size:12.5px;}
-
-  .proj.wide{grid-column:1/-1;}
-
-  .note{
-    font-size:12.5px; color:var(--fg-dim); border-left:2px solid var(--warn); padding-left:10px; margin-top:14px;
-  }
-
-  /* ---------- growth timeline ---------- */
-  .growth{display:flex; overflow-x:auto; gap:14px; padding-bottom:12px; -webkit-overflow-scrolling:touch;}
-  .growth::-webkit-scrollbar{height:6px;}
-  .growth::-webkit-scrollbar-thumb{background:var(--line); border-radius:3px;}
-  .g-item{flex:0 0 200px; background:var(--card); border:1px solid var(--line); border-radius:10px; padding:16px;}
-  .g-item .yr{font-family:var(--mono); color:var(--accent); font-size:13px; font-weight:700;}
-  .g-item h4{font-size:14px; margin:6px 0;}
-  .g-item p{font-size:12.5px; color:var(--fg-dim);}
-
-  /* ---------- stack ---------- */
-  .stack-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:16px;}
-  .stack-cat h4{font-family:var(--mono); font-size:12px; color:var(--accent2); margin-bottom:10px; text-transform:uppercase; letter-spacing:0.05em;}
-  .stack-cat .tags{display:flex; flex-wrap:wrap; gap:6px;}
-
-  /* ---------- closing ---------- */
-  .closing{
-    text-align:center; padding:80px 0 100px;
-  }
-  .closing h2{font-size:clamp(24px,4vw,36px); font-weight:800; max-width:780px; margin:0 auto 20px;}
-  .closing p{color:var(--fg-dim); max-width:560px; margin:0 auto 32px;}
-  .cta{
-    display:inline-flex; gap:14px; flex-wrap:wrap; justify-content:center;
-  }
-  .btn{
-    font-family:var(--mono); font-size:14px; padding:12px 24px; border-radius:8px; text-decoration:none; display:inline-block;
-  }
-  .btn.primary{background:var(--accent); color:#04211c; font-weight:700;}
-  .btn.ghost{border:1px solid var(--line); color:var(--fg);}
-
-  footer{border-top:1px solid var(--line); padding:24px 0; text-align:center; color:var(--fg-dim); font-size:12px; font-family:var(--mono);}
-
-  /* ---------- ambient network background ---------- */
-  #net-bg{
-    position:fixed; inset:0; z-index:-1; width:100%; height:100%;
-    opacity:.5;
-  }
-
-  /* ---------- scroll progress ---------- */
-  #scroll-bar{
-    position:fixed; top:0; left:0; height:2px; width:0%; z-index:100;
-    background:linear-gradient(90deg, var(--accent), var(--accent2));
-    box-shadow:0 0 8px rgba(94,234,212,0.6);
-    transition:width .08s linear;
-  }
-
-  /* ---------- reveal-on-scroll ---------- */
-  .reveal{opacity:0; transform:translateY(22px); transition:opacity .7s cubic-bezier(.16,.8,.24,1), transform .7s cubic-bezier(.16,.8,.24,1);}
-  .reveal.in-view{opacity:1; transform:translateY(0);}
-
-  /* ---------- hero entrance ---------- */
-  @keyframes fadeUp{from{opacity:0; transform:translateY(18px);} to{opacity:1; transform:translateY(0);}}
-  .hero-in .name{animation:fadeUp .8s cubic-bezier(.16,.8,.24,1) .15s both;}
-  .hero-in .tagline{animation:fadeUp .8s cubic-bezier(.16,.8,.24,1) .35s both;}
-  .hero-in .stats{animation:fadeUp .8s cubic-bezier(.16,.8,.24,1) .55s both;}
-
-  h1.name{background-size:200% auto; animation:sheen 7s linear infinite;}
-  @keyframes sheen{
-    0%{background-position:0% center;}
-    100%{background-position:200% center;}
-  }
-
-  /* ---------- 3d tilt + spotlight cards ---------- */
-  .proj, .g-item{
-    position:relative;
-    transform-style:preserve-3d;
+  /* ================= lab (bento) ================= */
+  #lab{background:linear-gradient(180deg,transparent,rgba(167,139,250,.035) 30%,rgba(34,211,238,.03) 70%,transparent);}
+  .bento{display:grid;grid-template-columns:repeat(6,1fr);gap:18px;}
+  .cell{
+    grid-column:span 3;
+    background:var(--card);border:1px solid var(--line);border-radius:18px;padding:30px;
+    position:relative;overflow:hidden;
+    transition:transform .3s cubic-bezier(.16,1,.3,1), border-color .3s, box-shadow .3s;
     will-change:transform;
-    transition:transform .25s cubic-bezier(.16,.8,.24,1), border-color .2s ease, box-shadow .25s ease;
   }
-  .proj::before, .g-item::before{
-    content:""; position:absolute; inset:0; border-radius:inherit; pointer-events:none;
-    background:radial-gradient(240px circle at var(--mx,50%) var(--my,50%), rgba(94,234,212,0.14), transparent 65%);
-    opacity:0; transition:opacity .3s ease;
+  .cell.hero-cell{grid-column:span 6;}
+  .cell.third{grid-column:span 2;}
+  @media(max-width:900px){.cell,.cell.third{grid-column:span 6;}}
+  .cell::before{
+    content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;
+    background:radial-gradient(360px circle at var(--mx,50%) var(--my,50%),rgba(34,211,238,.1),transparent 65%);
+    opacity:0;transition:opacity .35s;
   }
-  .proj:hover::before, .g-item:hover::before{opacity:1;}
-  .proj:hover, .g-item:hover{box-shadow:0 18px 40px -18px rgba(0,0,0,0.6);}
-  .job{transition:transform .2s ease;}
-  .job:hover{transform:translateX(4px);}
+  .cell:hover::before{opacity:1;}
+  .cell:hover{border-color:rgba(34,211,238,.35);box-shadow:0 24px 60px -24px rgba(0,0,0,.8);}
+  .cell .k{font-family:var(--mono);font-size:10.5px;letter-spacing:.22em;color:var(--c3);text-transform:uppercase;}
+  .cell h3{font-family:var(--disp);font-size:clamp(19px,2.4vw,25px);font-weight:600;margin:12px 0 12px;letter-spacing:-.01em;}
+  .cell h3 code{font-family:var(--mono);font-size:.85em;color:var(--c1);}
+  .cell p{color:var(--dim);font-size:14px;}
+  .cell p code{font-family:var(--mono);font-size:.9em;color:var(--c1);}
+  .cell ul{margin-top:14px;padding-left:18px;color:var(--dim);font-size:13.5px;}
+  .cell ul li{margin-bottom:5px;}
+  .cell .tags{margin-top:18px;display:flex;flex-wrap:wrap;gap:7px;}
+  .cell .link{display:inline-block;margin-top:16px;font-family:var(--mono);font-size:12.5px;color:var(--c1);text-decoration:none;}
+  .cell .link:hover{text-decoration:underline;}
+  .cell .note{font-size:12px;color:var(--dimmer);border-left:2px solid rgba(244,114,182,.5);padding-left:12px;margin-top:16px;line-height:1.6;}
+  .repo-map{
+    margin-top:22px;display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;
+  }
+  .repo-map .node{
+    font-family:var(--mono);font-size:11px;border:1px solid var(--line);border-radius:10px;padding:12px;
+    color:var(--dim);background:rgba(255,255,255,.02);transition:all .25s;
+  }
+  .repo-map .node b{display:block;color:var(--c1);font-size:11.5px;margin-bottom:4px;font-weight:500;}
+  .repo-map .node:hover{border-color:rgba(34,211,238,.45);transform:translateY(-2px);}
 
-  /* ---------- number count-up ---------- */
-  .stat .num .count{display:inline;}
+  /* ================= growth ================= */
+  .growth{display:flex;overflow-x:auto;gap:16px;padding:8px 4px 20px;-webkit-overflow-scrolling:touch;
+    scroll-snap-type:x proximity;}
+  .growth::-webkit-scrollbar{height:5px;}
+  .growth::-webkit-scrollbar-thumb{background:var(--line);border-radius:3px;}
+  .g-item{flex:0 0 235px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px;
+    scroll-snap-align:start;position:relative;overflow:hidden;transition:transform .3s,border-color .3s;}
+  .g-item:hover{transform:translateY(-4px);border-color:rgba(167,139,250,.4);}
+  .g-item .yr{font-family:var(--disp);color:transparent;-webkit-text-stroke:1px var(--c2);font-size:34px;font-weight:700;letter-spacing:-.02em;}
+  .g-item h4{font-size:14px;margin:10px 0 6px;font-weight:600;}
+  .g-item p{font-size:12.5px;color:var(--dim);}
 
-  @media (prefers-reduced-motion: reduce){
-    .hero-in .name, .hero-in .tagline, .hero-in .stats, h1.name{animation:none !important;}
-    .reveal{opacity:1; transform:none; transition:none;}
-    .proj, .g-item, .job{transition:none;}
+  /* ================= stack marquee ================= */
+  #stack{overflow:hidden;}
+  .marquee{display:flex;gap:14px;width:max-content;padding:8px 0;}
+  .marquee-row{overflow:hidden;margin-bottom:14px;
+    -webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);
+    mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);}
+  .marquee-row:hover .marquee{animation-play-state:paused;}
+  .m1 .marquee{animation:slideL 42s linear infinite;}
+  .m2 .marquee{animation:slideR 48s linear infinite;}
+  .m3 .marquee{animation:slideL 38s linear infinite;}
+  @keyframes slideL{to{transform:translateX(-50%);}}
+  @keyframes slideR{from{transform:translateX(-50%);}to{transform:translateX(0);}}
+  .chip{font-family:var(--mono);font-size:13px;white-space:nowrap;padding:10px 20px;border:1px solid var(--line);
+    border-radius:999px;color:var(--dim);background:rgba(255,255,255,.02);transition:all .25s;}
+  .chip:hover{color:var(--c1);border-color:rgba(34,211,238,.5);}
+  .chip.hot{color:var(--fg);border-color:rgba(167,139,250,.4);}
+
+  /* ================= closing ================= */
+  .closing{text-align:center;padding:160px 0 120px;position:relative;}
+  .closing h2{font-family:var(--disp);font-size:clamp(30px,5.6vw,58px);font-weight:700;letter-spacing:-.02em;
+    max-width:900px;margin:0 auto 24px;line-height:1.2;}
+  .closing h2 .gr{background:linear-gradient(100deg,var(--c1),var(--c2),var(--c3));
+    -webkit-background-clip:text;background-clip:text;color:transparent;}
+  .closing p{color:var(--dim);max-width:560px;margin:0 auto 42px;}
+  .cta{display:inline-flex;gap:16px;flex-wrap:wrap;justify-content:center;}
+  .btn{font-family:var(--mono);font-size:14px;padding:14px 30px;border-radius:10px;text-decoration:none;
+    display:inline-block;position:relative;transition:transform .2s, box-shadow .3s;}
+  .btn.primary{background:linear-gradient(100deg,var(--c1),var(--c2));color:#04101c;font-weight:700;}
+  .btn.primary:hover{box-shadow:0 0 40px rgba(34,211,238,.4);}
+  .btn.ghost{border:1px solid var(--line);color:var(--fg);}
+  .btn.ghost:hover{border-color:var(--c1);}
+
+  footer{border-top:1px solid var(--line);padding:30px 0;color:var(--dimmer);font-size:12px;font-family:var(--mono);}
+  footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;}
+
+  /* ================= command palette ================= */
+  #palette{position:fixed;inset:0;z-index:180;display:none;align-items:flex-start;justify-content:center;
+    padding:14vh 20px 0;background:rgba(2,3,7,.65);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);}
+  #palette.open{display:flex;}
+  .pal-box{width:min(560px,100%);background:rgba(10,13,22,.96);border:1px solid var(--line);border-radius:16px;
+    overflow:hidden;box-shadow:0 40px 100px -20px rgba(0,0,0,.9);}
+  .pal-box input{width:100%;background:transparent;border:none;outline:none;color:var(--fg);
+    font-family:var(--mono);font-size:15px;padding:18px 20px;border-bottom:1px solid var(--line);}
+  .pal-box input::placeholder{color:var(--dimmer);}
+  .pal-list{max-height:320px;overflow-y:auto;padding:8px;}
+  .pal-item{display:flex;align-items:center;gap:12px;padding:11px 14px;border-radius:10px;cursor:pointer;
+    font-size:13.5px;color:var(--dim);font-family:var(--mono);}
+  .pal-item .ico{color:var(--c1);font-size:12px;width:16px;text-align:center;}
+  .pal-item.sel{background:rgba(34,211,238,.1);color:var(--fg);}
+  .pal-item .hint{margin-left:auto;font-size:10.5px;color:var(--dimmer);}
+  .pal-foot{border-top:1px solid var(--line);padding:9px 16px;font-family:var(--mono);font-size:10.5px;color:var(--dimmer);
+    display:flex;gap:16px;}
+  .pal-foot kbd{background:rgba(255,255,255,.07);border-radius:4px;padding:1px 5px;}
+
+  /* ================= reveal ================= */
+  .reveal{opacity:0;transform:translateY(30px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1);}
+  .reveal.in{opacity:1;transform:none;}
+
+  @media(prefers-reduced-motion:reduce){
+    *,*::before,*::after{animation-duration:.001s !important;animation-iteration-count:1 !important;transition-duration:.001s !important;}
+    .reveal{opacity:1;transform:none;}
+    h1.name .row span{transform:none;animation:none;}
+    h1.name .row:nth-child(2) span{background:linear-gradient(100deg,var(--c1),var(--c2) 55%,var(--c3));
+      -webkit-background-clip:text;background-clip:text;color:transparent;}
+    #boot{display:none;}
+    .grain{display:none;}
   }
 </style>
 </head>
 <body>
 
-<canvas id="net-bg" aria-hidden="true"></canvas>
+<canvas id="gl" aria-hidden="true"></canvas>
+<div class="bg-shade" aria-hidden="true"></div>
+<div class="grain" aria-hidden="true"></div>
 <div id="scroll-bar" aria-hidden="true"></div>
+<div class="cursor-dot" aria-hidden="true"></div>
+<div class="cursor-ring" aria-hidden="true"></div>
 
-<nav>
+<div id="boot" aria-hidden="true">
+  <div class="term">
+    <div class="ln" data-line="$ ssh guest@ultimania.dev"></div>
+    <div class="ln" data-line="&gt; loading career.dat .......... OK" data-ok></div>
+    <div class="ln" data-line="&gt; mounting /lab ............... OK" data-ok></div>
+    <div class="ln" data-line="&gt; integrity check ............. PASSED" data-ok></div>
+    <div class="ln caret" data-line="&gt; access granted. welcome."></div>
+  </div>
+</div>
+
+<nav id="nav">
   <div class="wrap">
-    <div class="brand">~/ultimania $</div>
+    <a class="brand" href="#top"><b>TF</b>_ultimania</a>
     <div class="links">
-      <a href="#career"><span class="lang-en">career</span><span class="lang-ja">職務経歴</span></a>
-      <a href="#lab"><span class="lang-en">lab</span><span class="lang-ja">個人開発</span></a>
-      <a href="#growth"><span class="lang-en">growth</span><span class="lang-ja">成長</span></a>
-      <a href="#stack"><span class="lang-en">stack</span><span class="lang-ja">スタック</span></a>
-      <a href="https://github.com/ultimania" target="_blank" rel="noopener">github</a>
+      <a href="#career" data-hover><span class="lang-en">career</span><span class="lang-ja">職務経歴</span></a>
+      <a href="#lab" data-hover><span class="lang-en">lab</span><span class="lang-ja">個人開発</span></a>
+      <a href="#growth" data-hover><span class="lang-en">growth</span><span class="lang-ja">成長</span></a>
+      <a href="#stack" data-hover><span class="lang-en">stack</span><span class="lang-ja">スタック</span></a>
+      <a href="https://github.com/ultimania" target="_blank" rel="noopener" data-hover>github</a>
+      <button class="kbd-hint" id="pal-open" data-hover><span class="lang-en">command</span><span class="lang-ja">コマンド</span><kbd>⌘K</kbd></button>
       <div class="lang-toggle">
-        <button type="button" class="opt" data-lang="en">EN</button>
-        <button type="button" class="opt" data-lang="ja">日本語</button>
+        <button type="button" class="opt" data-lang="en" data-hover>EN</button>
+        <button type="button" class="opt" data-lang="ja" data-hover>日本語</button>
       </div>
     </div>
   </div>
 </nav>
 
-<header class="hero hero-in">
+<header class="hero" id="top">
+  <div class="kanji" aria-hidden="true">巧</div>
+  <div class="vertical-jp lang-ja" aria-hidden="true">混沌を、秩序に。</div>
+  <div class="vertical-jp lang-en" aria-hidden="true">混沌を、秩序に。</div>
   <div class="wrap">
-    <div class="prompt lang-en" data-type="$ whoami">$ whoami</div>
-    <div class="prompt lang-ja" data-type="$ whoami">$ whoami</div>
+    <div class="prompt">$ whoami</div>
 
-    <div class="lang-en">
-      <h1 class="name">Takumi Fukaya</h1>
-      <p class="tagline">
-        <b>Zero Trust</b> security architect for national-scale enterprises — automotive, insurance, legal, public sector.
-        On the side, I build the <b>operating systems that let AI agents work autonomously, safely, and without supervision</b>.
-        Ten years turning chaos — technical, organizational, and now agentic — into systems that hold.
-      </p>
-      <div class="stats">
-        <div class="stat"><div class="num"><span class="count" data-count="10">0</span><span style="font-size:13px">+ yrs</span></div><div class="label">production systems, 4 industries</div></div>
-        <div class="stat"><div class="num"><span class="count" data-count="16">0</span><span style="font-size:13px">+</span></div><div class="label">delivered projects</div></div>
-        <div class="stat"><div class="num">5-repo</div><div class="label">personal AI agent platform</div></div>
-        <div class="stat"><div class="num">0→1</div><div class="label">pitch, build &amp; ship it myself</div></div>
-      </div>
+    <h1 class="name" aria-label="Takumi Fukaya">
+      <span class="row"><span>TAKUMI</span></span>
+      <span class="row"><span>FUKAYA</span></span>
+    </h1>
+
+    <div class="role-line">
+      <span class="pre">&gt;&nbsp;</span><span class="scramble" id="role"></span>
     </div>
 
-    <div class="lang-ja">
-      <h1 class="name">深谷 巧</h1>
-      <p class="tagline">
-        自動車・保険・法律・官公庁 — 国家規模のエンタープライズで<b>ゼロトラスト</b>のセキュリティを設計する一方、
-        個人では<b>AIエージェントが自律的かつ安全に、監視なしで動けるための"OS"</b>を作っている。
-        技術的にも、組織的にも、そして今はエージェント的にも — 混沌をシステムに変えてきた10年。
-      </p>
-      <div class="stats">
-        <div class="stat"><div class="num"><span class="count" data-count="10">0</span><span style="font-size:13px">年+</span></div><div class="label">4業界での本番システム経験</div></div>
-        <div class="stat"><div class="num"><span class="count" data-count="16">0</span><span style="font-size:13px">件+</span></div><div class="label">プロジェクト経験</div></div>
-        <div class="stat"><div class="num">5repo</div><div class="label">個人AIエージェント基盤</div></div>
-        <div class="stat"><div class="num">0→1</div><div class="label">企画・開発・売り込みも自分で</div></div>
+    <p class="tagline lang-en">
+      <b>Zero Trust</b> security architect for national-scale enterprises — automotive, insurance, legal, public sector.
+      On the side, I build the <b>operating systems that let AI agents work autonomously, safely, and without supervision</b>.
+      Ten years turning chaos — technical, organizational, and now agentic — into systems that hold.
+    </p>
+    <p class="tagline lang-ja">
+      自動車・保険・法律・官公庁 — 国家規模のエンタープライズで<b>ゼロトラスト</b>のセキュリティを設計する一方、
+      個人では<b>AIエージェントが自律的かつ安全に、監視なしで動けるための"OS"</b>を作っている。
+      技術的にも、組織的にも、そして今はエージェント的にも — 混沌をシステムに変えてきた10年。
+    </p>
+
+    <div class="stats">
+      <div class="stat">
+        <div class="num"><span class="count" data-count="10">0</span><span class="unit">+yrs</span></div>
+        <div class="label"><span class="lang-en">production systems, 4 industries</span><span class="lang-ja">4業界での本番システム経験</span></div>
+      </div>
+      <div class="stat">
+        <div class="num"><span class="count" data-count="16">0</span><span class="unit">+</span></div>
+        <div class="label"><span class="lang-en">delivered projects</span><span class="lang-ja">プロジェクト経験</span></div>
+      </div>
+      <div class="stat">
+        <div class="num">5<span class="unit">repos</span></div>
+        <div class="label"><span class="lang-en">personal AI agent platform</span><span class="lang-ja">個人AIエージェント基盤</span></div>
+      </div>
+      <div class="stat">
+        <div class="num">0→1</div>
+        <div class="label"><span class="lang-en">pitch, build &amp; ship it myself</span><span class="lang-ja">企画・開発・売り込みも自分で</span></div>
       </div>
     </div>
-
   </div>
+  <div class="scroll-cue"><span class="lang-en">scroll</span><span class="lang-ja">scroll</span></div>
 </header>
 
 <section id="career">
   <div class="wrap">
-    <div class="lang-en">
-      <div class="section-head"><span class="idx">01</span><h2>Track record — built, rescued, sold, and led for a decade</h2></div>
-      <p class="section-lead">
+    <div class="sec-head reveal">
+      <div class="ghost">01</div>
+      <span class="idx">01 / CAREER</span>
+      <h2 class="lang-en">Built, rescued, sold, and led — for a decade.</h2>
+      <h2 class="lang-ja">手を動かし、火を消し、売り、導いた10年。</h2>
+      <p class="sec-lead lang-en">
         From OSS customization at an SIer to leading a Zero Trust PoC for a national automaker — with a project
         turnaround, a standing technical-advisor seat at a top-tier life insurer, and a Snowflake data platform for
         a major law firm along the way. I don't just build. I rescue projects, sell solutions, and teach engineers.
       </p>
-    </div>
-    <div class="lang-ja">
-      <div class="section-head"><span class="idx">01</span><h2>職務の軌跡 — 手を動かし、火を消し、売り、導いた10年</h2></div>
-      <p class="section-lead">
+      <p class="sec-lead lang-ja">
         SIerでOSSカスタマイズを書くところから始まり、大手自動車メーカーのゼロトラストPoCを主導するまで。
         道中には炎上プロジェクトの立て直し、大手生保システム会社での技術アドバイザ職、大手弁護士事務所向けの
         Snowflakeデータ基盤構築も。「作る」だけでなく「立て直す」「売る」「教える」も担当してきた。
       </p>
     </div>
 
-    <div class="career">
+    <div class="timeline">
+      <div class="rail"><div class="fill" id="rail-fill"></div></div>
 
       <div class="job reveal">
-        <div class="period">2024.11 – 2025.10</div>
+        <div class="dot"></div>
+        <div class="period">2024.11 – 2025.10<span class="flag lang-en">Tech Lead</span><span class="flag lang-ja">Tech Lead</span></div>
         <div class="lang-en">
-          <h3>National Automaker — Zero Trust API Platform PoC (Tech Lead)</h3>
+          <h3>National Automaker — Zero Trust API Platform PoC</h3>
           <p>
             Led architecture and PoC for a company-wide secure API platform. Delivered API governance and
             observability on Apigee, OAuth2.0/OIDC-based SSO/MFA on EntraID, and RBAC/ABAC authorization design
@@ -314,7 +458,7 @@
           </p>
         </div>
         <div class="lang-ja">
-          <h3>大手自動車メーカー — 全社API開発プラットフォームPoC（テックリード）</h3>
+          <h3>大手自動車メーカー — 全社API開発プラットフォームPoC</h3>
           <p>
             ゼロトラストを前提としたセキュアなAPI連携基盤のアーキテクチャ検討・PoCを主導。
             Apigeeによる API ガバナンス（利用状況可視化・レートリミット）、EntraID上でのOAuth2.0/OIDC実装によるSSO/MFA、
@@ -328,16 +472,17 @@
       </div>
 
       <div class="job reveal">
-        <div class="period">2025.07 – 2026.06</div>
+        <div class="dot"></div>
+        <div class="period">2025.07 – 2026.06<span class="flag lang-en">Tech Lead</span><span class="flag lang-ja">Tech Lead</span></div>
         <div class="lang-en">
-          <h3>Insurance Agency Evaluation System — New Build (Tech Lead)</h3>
+          <h3>Insurance Agency Evaluation System — New Build</h3>
           <p>
             Tech-led a greenfield build on AWS, Vue.js, and TypeScript. Designed a custom Lambda framework
             for offline-capable environments, prioritizing extensibility and long-term maintainability.
           </p>
         </div>
         <div class="lang-ja">
-          <h3>損保代理店評価システム新規開発（テックリード）</h3>
+          <h3>損保代理店評価システム新規開発</h3>
           <p>
             AWS・Vue.js・TypeScriptでの新規開発をテックリードとして担当。オフライン環境での拡張性・保守性を
             考慮したLambda向け独自フレームワークを設計。
@@ -349,6 +494,7 @@
       </div>
 
       <div class="job reveal">
+        <div class="dot"></div>
         <div class="period">2025.05 – 2025.08</div>
         <div class="lang-en">
           <h3>Government New-Law Application System + AI-Driven Dev Rollout</h3>
@@ -371,6 +517,7 @@
       </div>
 
       <div class="job reveal">
+        <div class="dot"></div>
         <div class="period">2024.12 – 2025.04</div>
         <div class="lang-en">
           <h3>Major Law Firm — Data Platform on Snowflake × AWS</h3>
@@ -393,9 +540,10 @@
       </div>
 
       <div class="job reveal">
-        <div class="period">2023.11 – 2024.11</div>
+        <div class="dot"></div>
+        <div class="period">2023.11 – 2024.11<span class="flag lang-en">Turnaround</span><span class="flag lang-ja">立て直し</span></div>
         <div class="lang-en">
-          <h3>Mutual-Aid System Infra Renewal — Project Turnaround (Tech Lead)</h3>
+          <h3>Mutual-Aid System Infra Renewal — Project Turnaround</h3>
           <p>
             Took over a project failing on quality, cost, expertise, and schedule. Ran on-site diagnostics,
             designed and drove quality and cost-reduction measures, and served as the cross-team technical
@@ -403,7 +551,7 @@
           </p>
         </div>
         <div class="lang-ja">
-          <h3>共済団体システム基盤更改 — 炎上プロジェクトの立て直し（テックリード）</h3>
+          <h3>共済団体システム基盤更改 — 炎上プロジェクトの立て直し</h3>
           <p>
             低品質・高コスト・技術知見不足・スケジュール遅延で炎上していたプロジェクトに参画し、
             現場実態調査から品質強化策・コスト削減策の策定・推進までを担当。
@@ -417,9 +565,10 @@
       </div>
 
       <div class="job reveal">
-        <div class="period">2023.09 – 2024.11</div>
+        <div class="dot"></div>
+        <div class="period">2023.09 – 2024.11<span class="flag lang-en">Concurrent</span><span class="flag lang-ja">並行担当</span></div>
         <div class="lang-en">
-          <h3>Major Life Insurer — Technical Advisor (concurrent engagement)</h3>
+          <h3>Major Life Insurer — Technical Advisor</h3>
           <p>
             Reviewed private-cloud enhancement proposals and application deliverables (design docs, test
             specs) from a technical standpoint, and ran a running technical clinic. Within the first month,
@@ -427,7 +576,7 @@
           </p>
         </div>
         <div class="lang-ja">
-          <h3>大手生保システム会社様 — 技術アドバイザ（上記案件と並行担当）</h3>
+          <h3>大手生保システム会社様 — 技術アドバイザ</h3>
           <p>
             社内プライベートクラウド環境のエンハンスに際して作成した調査・検討資料や、アプリケーション
             開発成果物（設計書・テスト仕様書等）へのレビュー・技術提言を担当。技術相談会を開催し、
@@ -440,9 +589,10 @@
       </div>
 
       <div class="job reveal">
-        <div class="period">2022.10 – 2023.10</div>
+        <div class="dot"></div>
+        <div class="period">2022.10 – 2023.10<span class="flag lang-en">0 → 1</span><span class="flag lang-ja">0 → 1</span></div>
         <div class="lang-en">
-          <h3>Data Analytics Solution — 0→1 Founder Role</h3>
+          <h3>Data Analytics Solution — Founder Role</h3>
           <p>
             Led company's in-house data-analytics solution end-to-end: grand design, technology selection,
             requirements through implementation and testing, plus enterprise webinars (as lead speaker,
@@ -451,7 +601,7 @@
           </p>
         </div>
         <div class="lang-ja">
-          <h3>データ分析ソリューション企画・開発・販促（0→1のキーパーソン）</h3>
+          <h3>データ分析ソリューション企画・開発・販促</h3>
           <p>
             自社ソリューションの企画立ち上げから技術選定、要件定義〜実装〜テスト、
             さらに企業向けウェビナー登壇（四半期3回、メインスピーカー）・プリセールスまでを一貫して主導。
@@ -466,6 +616,7 @@
       </div>
 
       <div class="job reveal">
+        <div class="dot"></div>
         <div class="period">2021.06 – 2022.09</div>
         <div class="lang-en">
           <h3>Consumer Restaurant-Reservation Service — Microservices</h3>
@@ -490,6 +641,7 @@
       </div>
 
       <div class="job reveal">
+        <div class="dot"></div>
         <div class="period">2020.10 – 2021.05</div>
         <div class="lang-en">
           <h3>DevOps Trend R&amp;D + Internal Enablement</h3>
@@ -513,6 +665,7 @@
       </div>
 
       <div class="job reveal">
+        <div class="dot"></div>
         <div class="period">2016.04 – 2020.09</div>
         <div class="lang-en">
           <h3>Early SIer Years — OSS Internals to Project Management</h3>
@@ -540,30 +693,30 @@
   </div>
 </section>
 
-<section id="lab" style="background:linear-gradient(180deg,transparent,rgba(94,234,212,0.03),transparent);">
+<section id="lab">
   <div class="wrap">
-    <div class="lang-en">
-      <div class="section-head"><span class="idx">02</span><h2>What I build on my own — self-upgrading for the AI-agent era</h2></div>
-      <p class="section-lead">
+    <div class="sec-head reveal">
+      <div class="ghost">02</div>
+      <span class="idx">02 / LAB</span>
+      <h2 class="lang-en">What I build on my own.</h2>
+      <h2 class="lang-ja">個人で作っているもの。</h2>
+      <p class="sec-lead lang-en">
         Outside client work, I build my own AI agent infrastructure, evaluation harnesses, and a spec-driven
         development testbed. Not just "using AI" — building the systems that let AI agents run autonomously
         and safely, which is the harder, less-glamorous problem enterprises will need solved next.
       </p>
-    </div>
-    <div class="lang-ja">
-      <div class="section-head"><span class="idx">02</span><h2>個人で作っているもの — AIエージェント時代への自己アップデート</h2></div>
-      <p class="section-lead">
+      <p class="sec-lead lang-ja">
         業務の外側で、自分専用のAIエージェント基盤・評価の仕組み・スペック駆動開発の実験場を自作している。
         「AIを使う」ではなく「AIエージェントが安全に自律稼働できる仕組み自体」を作っているのが特徴。
       </p>
     </div>
 
-    <div class="grid">
+    <div class="bento">
 
-      <div class="proj wide reveal">
-        <div class="k">PERSONAL AGENT PLATFORM</div>
+      <div class="cell hero-cell reveal">
+        <div class="k">Personal Agent Platform</div>
         <div class="lang-en">
-          <h3>tsumugi — a personal multi-repo AI agent platform</h3>
+          <h3><code>tsumugi</code> — a personal multi-repo AI agent platform</h3>
           <p>
             A 5-repo personal AI stack built out over ~4 months in parallel. The core, <code>tsumugi-ai</code>,
             runs 9 CLI workflows (research, task decomposition, weekly review, health-log summarization, and
@@ -574,17 +727,13 @@
             agent API over HTTP. <code>tsumugi-governance</code> enforces shared rules across every sub-repo
             through 5 layers — pre-commit, CI, hooks, runtime, and manual review.
           </p>
-          <ul>
-            <li>Python (CrewAI/FastAPI) / Swift (SwiftUI) / Qdrant / OpenTelemetry / MS Graph API</li>
-            <li>Not just "using" agents — designing the system that governs multiple agents at once</li>
-          </ul>
         </div>
         <div class="lang-ja">
-          <h3>tsumugi — 個人用マルチリポジトリAIエージェント基盤</h3>
+          <h3><code>tsumugi</code> — 個人用マルチリポジトリAIエージェント基盤</h3>
           <p>
             約4ヶ月で並行構築した5リポジトリ構成のパーソナルAI基盤。中核の <code>tsumugi-ai</code> は
             CrewAI + FastAPI + Ollamaで9系統のCLI（調査・ToDo分解・週次レビュー・健康ログ要約など）を提供し、
-            Slack/Notion連携用にPostgreSQL（Alembic管理）とOpenTelemetryによる分散トレーシングまで実装。
+            PostgreSQL（Alembic管理）とOpenTelemetryによる分散トレーシングまで実装。
             <code>tsumugi-rag-teams</code> はMicrosoft Graph API経由でTeamsのチャネル履歴を同期し、
             Qdrant + sentence-transformersでベクトル検索可能にする独立RAGサービス。
             <code>tsumugi-desktop</code> はSwiftUI製のネイティブmacOSデスクトップマスコットで、
@@ -592,10 +741,13 @@
             <code>tsumugi-governance</code> は5段階の強制レイヤー（pre-commit/CI/hook/runtime/manual review）で
             ルールを機械検証可能にし、全サブリポジトリへ配布するガバナンス基盤。
           </p>
-          <ul>
-            <li>Python(CrewAI/FastAPI) / Swift(SwiftUI) / Qdrant / OpenTelemetry / MS Graph API</li>
-            <li>「使う」だけでなく「複数エージェントを統治する仕組み」自体を設計・実装</li>
-          </ul>
+        </div>
+        <div class="repo-map" aria-hidden="false">
+          <div class="node"><b>tsumugi-ai</b><span class="lang-en">CrewAI · FastAPI · Ollama · OTel</span><span class="lang-ja">CrewAI · FastAPI · Ollama · OTel</span></div>
+          <div class="node"><b>tsumugi-rag-teams</b><span class="lang-en">Graph API → Qdrant RAG</span><span class="lang-ja">Graph API → Qdrant RAG</span></div>
+          <div class="node"><b>tsumugi-desktop</b><span class="lang-en">SwiftUI · 99 tests</span><span class="lang-ja">SwiftUI · Swiftテスト99件</span></div>
+          <div class="node"><b>tsumugi-governance</b><span class="lang-en">5-layer rule enforcement</span><span class="lang-ja">5層のルール強制</span></div>
+          <div class="node"><b>tsumugi-core</b><span class="lang-en">shared foundations</span><span class="lang-ja">共通基盤</span></div>
         </div>
         <div class="tags">
           <span class="tag">CrewAI</span><span class="tag">FastAPI</span><span class="tag">Ollama</span>
@@ -603,8 +755,8 @@
         </div>
       </div>
 
-      <div class="proj reveal">
-        <div class="k">AI GOVERNANCE EXPERIMENT</div>
+      <div class="cell reveal">
+        <div class="k">AI Governance Experiment</div>
         <div class="lang-en">
           <h3>Designing a "constitution" for AI agents</h3>
           <p>
@@ -632,17 +784,17 @@
           ※ 進行ログ上のラウンド別スコアは自己申告であり、本サイトでは独立検証できた
           「実在する文書・エージェント定義・比較手順」のみを事実として記載している。
         </p>
-        <a class="link lang-en" href="https://github.com/ultimania/ultimania" target="_blank" rel="noopener">View source on GitHub →</a>
-        <a class="link lang-ja" href="https://github.com/ultimania/ultimania" target="_blank" rel="noopener">GitHubでソースを見る →</a>
+        <a class="link lang-en" href="https://github.com/ultimania/ultimania" target="_blank" rel="noopener" data-hover>View source on GitHub →</a>
+        <a class="link lang-ja" href="https://github.com/ultimania/ultimania" target="_blank" rel="noopener" data-hover>GitHubでソースを見る →</a>
         <div class="tags">
           <span class="tag">Prompt Engineering</span><span class="tag">Claude Code</span><span class="tag">Sub-agent Design</span>
         </div>
       </div>
 
-      <div class="proj reveal">
-        <div class="k">SPEC-DRIVEN DEV RESEARCH</div>
+      <div class="cell reveal">
+        <div class="k">Spec-Driven Dev Research</div>
         <div class="lang-en">
-          <h3>spec-backborn — a testbed for spec-driven development</h3>
+          <h3><code>spec-backborn</code> — a testbed for spec-driven development</h3>
           <p>
             A research platform for spec-driven development itself: 2,211 commits in under a week, managing
             300+ sub-specs across a Backstage IDP, RBAC, OTel observability, codegraph, and Azure deployment.
@@ -651,7 +803,7 @@
           </p>
         </div>
         <div class="lang-ja">
-          <h3>spec-backborn — スペック駆動開発の実験基盤</h3>
+          <h3><code>spec-backborn</code> — スペック駆動開発の実験基盤</h3>
           <p>
             スペック駆動開発という手法自体を研究するプラットフォーム。1週間弱で2,211コミットを積み上げ、
             Backstage IDP・RBAC・OTel可観測性・codegraph・Azureデプロイなど300を超えるサブ仕様を管理。
@@ -663,8 +815,8 @@
         </div>
       </div>
 
-      <div class="proj reveal">
-        <div class="k">ITERATIVE BUILD</div>
+      <div class="cell reveal">
+        <div class="k">Iterative Build</div>
         <div class="lang-en">
           <h3>NEXUS TRADE — multi-broker AI trading dashboard</h3>
           <p>
@@ -687,10 +839,10 @@
         </div>
       </div>
 
-      <div class="proj reveal">
-        <div class="k">SHIPPED OSS</div>
+      <div class="cell reveal">
+        <div class="k">Shipped OSS</div>
         <div class="lang-en">
-          <h3>redmine_budget — public OSS Redmine plugin</h3>
+          <h3><code>redmine_budget</code> — public OSS Redmine plugin</h3>
           <p>
             Prorates each ticket's planned effort across its period and displays it on a calendar against
             actuals, visualizing plan-vs-actual at a glance. Public on GitHub, starred, and actively
@@ -698,14 +850,14 @@
           </p>
         </div>
         <div class="lang-ja">
-          <h3>redmine_budget — 公開OSS（Redmineプラグイン）</h3>
+          <h3><code>redmine_budget</code> — 公開OSS（Redmineプラグイン）</h3>
           <p>
             チケットごとの予定工数を期間按分してカレンダー表示し、実績工数と突き合わせて予実を可視化するプラグイン。
             GitHub上でスターの付いた公開OSSとして、Redmine 5.1.1以降に対応し継続メンテナンス中。
           </p>
         </div>
-        <a class="link lang-en" href="https://github.com/ultimania/redmine_budget" target="_blank" rel="noopener">View on GitHub →</a>
-        <a class="link lang-ja" href="https://github.com/ultimania/redmine_budget" target="_blank" rel="noopener">GitHubで見る →</a>
+        <a class="link lang-en" href="https://github.com/ultimania/redmine_budget" target="_blank" rel="noopener" data-hover>View on GitHub →</a>
+        <a class="link lang-ja" href="https://github.com/ultimania/redmine_budget" target="_blank" rel="noopener" data-hover>GitHubで見る →</a>
         <div class="tags">
           <span class="tag">Ruby</span><span class="tag">Redmine Plugin</span><span class="tag">GPLv2</span>
         </div>
@@ -717,13 +869,13 @@
 
 <section id="growth">
   <div class="wrap">
-    <div class="lang-en">
-      <div class="section-head"><span class="idx">03</span><h2>Growth timeline</h2></div>
-      <p class="section-lead">From Android/Java fundamentals through IoT, modern frontend, and now AI-agent-assisted infrastructure migration.</p>
-    </div>
-    <div class="lang-ja">
-      <div class="section-head"><span class="idx">03</span><h2>成長の軌跡</h2></div>
-      <p class="section-lead">Android/Javaの基礎学習から、IoT、モダンフロントエンド、そしてAIエージェント協働によるインフラ移行まで。</p>
+    <div class="sec-head reveal">
+      <div class="ghost">03</div>
+      <span class="idx">03 / GROWTH</span>
+      <h2 class="lang-en">Growth timeline.</h2>
+      <h2 class="lang-ja">成長の軌跡。</h2>
+      <p class="sec-lead lang-en">From Android/Java fundamentals through IoT, modern frontend, and now AI-agent-assisted infrastructure migration.</p>
+      <p class="sec-lead lang-ja">Android/Javaの基礎学習から、IoT、モダンフロントエンド、そしてAIエージェント協働によるインフラ移行まで。</p>
     </div>
     <div class="growth">
       <div class="g-item reveal">
@@ -757,49 +909,35 @@
 
 <section id="stack">
   <div class="wrap">
-    <div class="lang-en">
-      <div class="section-head"><span class="idx">04</span><h2>Stack</h2></div>
+    <div class="sec-head reveal">
+      <div class="ghost">04</div>
+      <span class="idx">04 / STACK</span>
+      <h2 class="lang-en">Stack.</h2>
+      <h2 class="lang-ja">技術スタック。</h2>
     </div>
-    <div class="lang-ja">
-      <div class="section-head"><span class="idx">04</span><h2>技術スタック</h2></div>
+  </div>
+  <div class="marquee-row m1 reveal">
+    <div class="marquee" data-dupe>
+      <span class="chip hot">Java</span><span class="chip">Python</span><span class="chip hot">TypeScript</span>
+      <span class="chip">Go</span><span class="chip">PHP</span><span class="chip">Ruby</span>
+      <span class="chip">Swift</span><span class="chip">C#</span><span class="chip">Bash / PowerShell</span>
+      <span class="chip hot">React</span><span class="chip">Next.js</span><span class="chip">Vue.js</span>
+      <span class="chip">TanStack</span><span class="chip">SwiftUI</span>
     </div>
-    <div class="stack-grid">
-      <div class="stack-cat">
-        <h4>Languages</h4>
-        <div class="tags">
-          <span class="tag">Java</span><span class="tag">Python</span><span class="tag">TypeScript</span>
-          <span class="tag">Go</span><span class="tag">PHP</span><span class="tag">Ruby</span>
-          <span class="tag">Swift</span><span class="tag">C#</span><span class="tag">Bash / PowerShell</span>
-        </div>
-      </div>
-      <div class="stack-cat">
-        <h4>Cloud / Infra</h4>
-        <div class="tags">
-          <span class="tag">AWS</span><span class="tag">Azure</span><span class="tag">Kubernetes</span>
-          <span class="tag">Docker</span><span class="tag">IaC</span><span class="tag">Apigee</span>
-        </div>
-      </div>
-      <div class="stack-cat">
-        <h4>AI / Agent</h4>
-        <div class="tags">
-          <span class="tag">Claude Code</span><span class="tag">CrewAI</span><span class="tag">Ollama</span>
-          <span class="tag">RAG / Qdrant</span><span class="tag">GitHub Copilot</span><span class="tag">OpenTelemetry</span>
-        </div>
-      </div>
-      <div class="stack-cat">
-        <h4>Frontend</h4>
-        <div class="tags">
-          <span class="tag">React</span><span class="tag">Next.js</span><span class="tag">Vue.js</span>
-          <span class="tag">TanStack</span><span class="tag">SwiftUI</span>
-        </div>
-      </div>
-      <div class="stack-cat">
-        <h4>Security / Identity</h4>
-        <div class="tags">
-          <span class="tag">OAuth2.0 / OIDC</span><span class="tag">Zero Trust</span><span class="tag">RBAC / ABAC</span>
-          <span class="tag">EntraID</span>
-        </div>
-      </div>
+  </div>
+  <div class="marquee-row m2 reveal">
+    <div class="marquee" data-dupe>
+      <span class="chip hot">AWS</span><span class="chip">Azure</span><span class="chip hot">Kubernetes</span>
+      <span class="chip">Docker</span><span class="chip">IaC</span><span class="chip">Apigee</span>
+      <span class="chip hot">OAuth2.0 / OIDC</span><span class="chip">Zero Trust</span><span class="chip">RBAC / ABAC</span>
+      <span class="chip">EntraID</span><span class="chip">Snowflake</span>
+    </div>
+  </div>
+  <div class="marquee-row m3 reveal">
+    <div class="marquee" data-dupe>
+      <span class="chip hot">Claude Code</span><span class="chip">CrewAI</span><span class="chip">Ollama</span>
+      <span class="chip hot">RAG / Qdrant</span><span class="chip">GitHub Copilot</span><span class="chip">OpenTelemetry</span>
+      <span class="chip">FastAPI</span><span class="chip">Playwright</span><span class="chip">Prisma</span>
     </div>
   </div>
 </section>
@@ -807,30 +945,44 @@
 <div class="closing">
   <div class="wrap">
     <div class="lang-en">
-      <h2>Built it, rescued it, sold it, taught it. All of it, myself.</h2>
+      <h2>Built it, rescued it, sold it, taught it.<br><span class="gr">All of it, myself.</span></h2>
       <p>The next team to run AI-agent-first engineering might be yours.</p>
     </div>
     <div class="lang-ja">
-      <h2>作るのも、立て直すのも、売り込むのも。<br>ひと通り、自分でやってきた。</h2>
+      <h2>作るのも、立て直すのも、<br>売り込むのも。<br><span class="gr">ひと通り、自分でやってきた。</span></h2>
       <p>次にAIエージェント前提の開発体制を作るのは、あなたのチームかもしれない。</p>
     </div>
     <div class="cta">
-      <a class="btn primary" href="https://github.com/ultimania" target="_blank" rel="noopener"><span class="lang-en">View GitHub →</span><span class="lang-ja">GitHubを見る →</span></a>
-      <a class="btn ghost" href="#career"><span class="lang-en">Career details</span><span class="lang-ja">職務経歴を見る</span></a>
+      <a class="btn primary" href="https://github.com/ultimania" target="_blank" rel="noopener" data-hover><span class="lang-en">View GitHub →</span><span class="lang-ja">GitHubを見る →</span></a>
+      <a class="btn ghost" href="#career" data-hover><span class="lang-en">Career details</span><span class="lang-ja">職務経歴を見る</span></a>
     </div>
   </div>
 </div>
 
 <footer>
-  <div class="wrap">built &amp; deployed by ultimania — github pages / 2026</div>
+  <div class="wrap">
+    <span>TF_ultimania — built &amp; deployed from the constitution repo</span>
+    <span>github pages / 2026</span>
+  </div>
 </footer>
+
+<div id="palette" role="dialog" aria-modal="true" aria-label="command palette">
+  <div class="pal-box">
+    <input type="text" id="pal-input" placeholder="> type a command…" autocomplete="off" spellcheck="false">
+    <div class="pal-list" id="pal-list"></div>
+    <div class="pal-foot">
+      <span><kbd>↑↓</kbd> navigate</span><span><kbd>↵</kbd> run</span><span><kbd>esc</kbd> close</span>
+    </div>
+  </div>
+</div>
 
 <script>
 (function(){
+  'use strict';
   var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  /* ---------- language toggle ---------- */
-  function apply(lang){
+  /* ============ language toggle ============ */
+  function applyLang(lang){
     document.documentElement.setAttribute('data-lang', lang);
     document.documentElement.lang = lang;
     document.querySelectorAll('.lang-toggle .opt').forEach(function(b){
@@ -838,67 +990,254 @@
     });
     try{ localStorage.setItem('site-lang', lang); }catch(e){}
   }
-  apply(document.documentElement.getAttribute('data-lang') || 'en');
+  applyLang(document.documentElement.getAttribute('data-lang') || 'en');
   document.querySelectorAll('.lang-toggle .opt').forEach(function(b){
-    b.addEventListener('click', function(){ apply(b.dataset.lang); });
+    b.addEventListener('click', function(){ applyLang(b.dataset.lang); });
   });
 
-  /* ---------- scroll progress bar + reveal safety net ---------- */
-  var bar = document.getElementById('scroll-bar');
-  var revealables = document.querySelectorAll('.reveal');
-  var scrollTicking = false;
-  function onScroll(){
-    var h = document.documentElement;
-    var pct = (h.scrollTop) / ((h.scrollHeight - h.clientHeight) || 1) * 100;
-    bar.style.width = pct + '%';
-    // safety net: if a scroll (anchor jump, deep link, reduced-motion browsers)
-    // lands past a .reveal element without it ever intersecting the viewport,
-    // IntersectionObserver never fires for it. Anything already at/above the
-    // fold should just be visible — no animation needed for content the user
-    // has already scrolled past.
-    revealables.forEach(function(el){
-      if(el.classList.contains('in-view')) return;
-      if(el.getBoundingClientRect().top < window.innerHeight) el.classList.add('in-view');
+  /* ============ boot preloader ============ */
+  var boot = document.getElementById('boot');
+  var seen = false;
+  try{ seen = sessionStorage.getItem('booted') === '1'; }catch(e){}
+  if(reduceMotion || seen){
+    boot.classList.add('done');
+  } else {
+    var lines = boot.querySelectorAll('.ln');
+    var li = 0;
+    function typeLine(){
+      if(li >= lines.length){
+        setTimeout(function(){
+          boot.classList.add('done');
+          try{ sessionStorage.setItem('booted','1'); }catch(e){}
+        }, 350);
+        return;
+      }
+      var el = lines[li], text = el.getAttribute('data-line'), ci = 0;
+      var isOk = el.hasAttribute('data-ok');
+      (function tick(){
+        ci += 3;
+        var t = text.slice(0, ci);
+        if(isOk){
+          el.innerHTML = t.replace(/(OK|PASSED)$/, '<span class="ok">$1</span>');
+        } else {
+          el.textContent = t;
+        }
+        if(ci < text.length){ setTimeout(tick, 14); }
+        else { li++; setTimeout(typeLine, 90); }
+      })();
+    }
+    typeLine();
+    boot.addEventListener('click', function(){
+      boot.classList.add('done');
+      try{ sessionStorage.setItem('booted','1'); }catch(e){}
     });
   }
+
+  /* ============ WebGL aurora background ============ */
+  var canvas = document.getElementById('gl');
+  var gl = canvas.getContext('webgl', {antialias:false, alpha:false});
+  var glOK = false;
+  if(gl){
+    var vsrc = 'attribute vec2 p;void main(){gl_Position=vec4(p,0.,1.);}';
+    var fsrc = [
+      'precision highp float;',
+      'uniform vec2 u_res;uniform float u_t;uniform vec2 u_m;',
+      'float hash(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}',
+      'float noise(vec2 p){vec2 i=floor(p),f=fract(p);f=f*f*(3.-2.*f);',
+      ' return mix(mix(hash(i),hash(i+vec2(1.,0.)),f.x),mix(hash(i+vec2(0.,1.)),hash(i+vec2(1.,1.)),f.x),f.y);}',
+      'float fbm(vec2 p){float v=0.,a=.5;for(int i=0;i<5;i++){v+=a*noise(p);p*=2.03;a*=.5;}return v;}',
+      'void main(){',
+      ' vec2 uv=(gl_FragCoord.xy-.5*u_res)/u_res.y;',
+      ' float t=u_t*.055;',
+      ' vec2 q=vec2(fbm(uv*1.4+t),fbm(uv*1.4+vec2(5.2,1.3)-t*.7));',
+      ' vec2 r=vec2(fbm(uv*1.4+3.*q+vec2(1.7,9.2)+.32*t),fbm(uv*1.4+3.*q+vec2(8.3,2.8)-.26*t));',
+      ' float f=fbm(uv*1.4+3.*r);',
+      ' vec3 base=vec3(.012,.016,.035);',
+      ' vec3 c1=vec3(.13,.83,.93);',
+      ' vec3 c2=vec3(.65,.55,.98);',
+      ' vec3 c3=vec3(.96,.45,.71);',
+      ' vec3 col=base;',
+      ' col=mix(col,c1*.62,smoothstep(.22,.92,f)*.85);',
+      ' col=mix(col,c2*.58,smoothstep(.3,.95,r.x)*.75);',
+      ' col=mix(col,c3*.45,q.y*r.y*.7);',
+      ' vec2 m=(u_m-.5*u_res)/u_res.y;',
+      ' col+=c1*exp(-length(uv-m)*2.6)*.05;',
+      ' col*=1.-.5*dot(uv,uv);',
+      ' gl_FragColor=vec4(col,1.);',
+      '}'
+    ].join('\n');
+    function sh(type, src){
+      var s = gl.createShader(type);
+      gl.shaderSource(s, src); gl.compileShader(s);
+      return gl.getShaderParameter(s, gl.COMPILE_STATUS) ? s : null;
+    }
+    var vs = sh(gl.VERTEX_SHADER, vsrc), fs = sh(gl.FRAGMENT_SHADER, fsrc);
+    if(vs && fs){
+      var prog = gl.createProgram();
+      gl.attachShader(prog, vs); gl.attachShader(prog, fs); gl.linkProgram(prog);
+      if(gl.getProgramParameter(prog, gl.LINK_STATUS)){
+        gl.useProgram(prog);
+        var buf = gl.createBuffer();
+        gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1,3,-1,-1,3]), gl.STATIC_DRAW);
+        var loc = gl.getAttribLocation(prog, 'p');
+        gl.enableVertexAttribArray(loc);
+        gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
+        var uRes = gl.getUniformLocation(prog, 'u_res');
+        var uT = gl.getUniformLocation(prog, 'u_t');
+        var uM = gl.getUniformLocation(prog, 'u_m');
+        glOK = true;
+        var mx = -9999, my = -9999, tmx = -9999, tmy = -9999;
+        var SCALE = 0.5; /* render at half res — fbm is soft, invisible upscale */
+        function fit(){
+          var w = Math.floor(window.innerWidth * SCALE), h = Math.floor(window.innerHeight * SCALE);
+          canvas.width = w; canvas.height = h;
+          gl.viewport(0, 0, w, h);
+        }
+        window.addEventListener('resize', fit);
+        window.addEventListener('mousemove', function(ev){ tmx = ev.clientX * SCALE; tmy = (window.innerHeight - ev.clientY) * SCALE; });
+        fit();
+        var running = true;
+        document.addEventListener('visibilitychange', function(){
+          running = !document.hidden;
+          if(running && !reduceMotion) requestAnimationFrame(frame);
+        });
+        var t0 = performance.now();
+        function frame(now){
+          if(!running) return;
+          mx += (tmx - mx) * .04; my += (tmy - my) * .04;
+          gl.uniform2f(uRes, canvas.width, canvas.height);
+          gl.uniform1f(uT, (now - t0) / 1000);
+          gl.uniform2f(uM, mx, my);
+          gl.drawArrays(gl.TRIANGLES, 0, 3);
+          if(!reduceMotion) requestAnimationFrame(frame);
+        }
+        requestAnimationFrame(frame); /* reduced motion: renders exactly one frame */
+      }
+    }
+  }
+  if(!glOK){
+    canvas.style.display = 'none';
+    document.body.style.background =
+      'radial-gradient(1100px 600px at 12% -8%, rgba(34,211,238,.09), transparent 60%),' +
+      'radial-gradient(900px 520px at 100% 4%, rgba(167,139,250,.08), transparent 60%),' +
+      'radial-gradient(700px 500px at 50% 110%, rgba(244,114,182,.05), transparent 60%), var(--bg)';
+  }
+
+  /* ============ custom cursor ============ */
+  var fine = window.matchMedia && window.matchMedia('(pointer:fine)').matches;
+  if(fine && !reduceMotion){
+    document.documentElement.classList.add('has-cursor');
+    var dot = document.querySelector('.cursor-dot');
+    var ring = document.querySelector('.cursor-ring');
+    var cx = -100, cy = -100, rx = -100, ry = -100;
+    window.addEventListener('mousemove', function(e){ cx = e.clientX; cy = e.clientY; });
+    (function loop(){
+      rx += (cx - rx) * .16; ry += (cy - ry) * .16;
+      dot.style.transform = 'translate(' + (cx - 3) + 'px,' + (cy - 3) + 'px)';
+      ring.style.transform = 'translate(' + (rx - 18) + 'px,' + (ry - 18) + 'px)';
+      requestAnimationFrame(loop);
+    })();
+    document.addEventListener('mouseover', function(e){
+      if(e.target.closest('a,button,[data-hover]')) ring.classList.add('hover');
+    });
+    document.addEventListener('mouseout', function(e){
+      if(e.target.closest('a,button,[data-hover]')) ring.classList.remove('hover');
+    });
+  }
+
+  /* ============ scroll: progress bar + nav + rail fill + reveal net ============ */
+  var bar = document.getElementById('scroll-bar');
+  var nav = document.getElementById('nav');
+  var railFill = document.getElementById('rail-fill');
+  var timeline = document.querySelector('#career .timeline');
+  var revealables = document.querySelectorAll('.reveal');
+  var jobs = document.querySelectorAll('.job');
+  var ticking = false;
+  function onScroll(){
+    var h = document.documentElement;
+    var pct = h.scrollTop / ((h.scrollHeight - h.clientHeight) || 1) * 100;
+    bar.style.width = pct + '%';
+    nav.classList.toggle('scrolled', h.scrollTop > 30);
+    if(timeline && railFill){
+      var r = timeline.getBoundingClientRect();
+      var fill = Math.min(1, Math.max(0, (window.innerHeight * .65 - r.top) / r.height));
+      railFill.style.height = (fill * 100) + '%';
+      jobs.forEach(function(j){
+        var jr = j.getBoundingClientRect();
+        j.classList.toggle('lit', jr.top < window.innerHeight * .65);
+      });
+    }
+    /* safety net: anchor jumps / deep links can land past .reveal elements
+       before IntersectionObserver fires — anything above the fold is shown */
+    revealables.forEach(function(el){
+      if(el.classList.contains('in')) return;
+      if(el.getBoundingClientRect().top < window.innerHeight) el.classList.add('in');
+    });
+    ticking = false;
+  }
   document.addEventListener('scroll', function(){
-    if(scrollTicking) return;
-    scrollTicking = true;
-    requestAnimationFrame(function(){ onScroll(); scrollTicking = false; });
+    if(ticking) return;
+    ticking = true;
+    requestAnimationFrame(onScroll);
   }, {passive:true});
   onScroll();
 
-  /* ---------- typewriter for prompt lines ---------- */
-  document.querySelectorAll('.prompt[data-type]').forEach(function(el){
-    var text = el.getAttribute('data-type');
-    if(reduceMotion){ el.textContent = text; return; }
-    el.textContent = '';
-    var i = 0;
-    (function tick(){
-      el.textContent = text.slice(0, i);
-      i++;
-      if(i <= text.length) setTimeout(tick, 55);
-    })();
-  });
-
-  /* ---------- reveal on scroll (IntersectionObserver, primary path) ---------- */
+  /* ============ reveal on scroll ============ */
   if('IntersectionObserver' in window && !reduceMotion){
     var io = new IntersectionObserver(function(entries){
       entries.forEach(function(e){
-        if(e.isIntersecting){ e.target.classList.add('in-view'); io.unobserve(e.target); }
+        if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
       });
-    }, {threshold:0.15, rootMargin:'0px 0px -40px 0px'});
+    }, {threshold:.12, rootMargin:'0px 0px -40px 0px'});
     revealables.forEach(function(el){ io.observe(el); });
   } else {
-    revealables.forEach(function(el){ el.classList.add('in-view'); });
+    revealables.forEach(function(el){ el.classList.add('in'); });
   }
 
-  /* ---------- count-up stats ---------- */
+  /* ============ text scramble role rotator ============ */
+  var ROLES = {
+    en: ['ZERO TRUST SECURITY ARCHITECT','AI AGENT SYSTEMS BUILDER','TECH LEAD × PROJECT RESCUER','0→1 PRODUCT FOUNDER'],
+    ja: ['ゼロトラスト・セキュリティアーキテクト','AIエージェント基盤ビルダー','テックリード × 炎上案件の火消し','0→1 プロダクト立ち上げ']
+  };
+  var roleEl = document.getElementById('role');
+  var CHARS = '!<>-_\\/[]{}—=+*^?#01';
+  var roleIdx = 0, scrambleTimer = null, rotateTimer = null;
+  function currentRoles(){
+    return ROLES[document.documentElement.getAttribute('data-lang')] || ROLES.en;
+  }
+  function scrambleTo(text){
+    if(reduceMotion){ roleEl.textContent = text; return; }
+    clearInterval(scrambleTimer);
+    var frame = 0, total = 22;
+    scrambleTimer = setInterval(function(){
+      frame++;
+      var out = '';
+      for(var i = 0; i < text.length; i++){
+        var reveal = (frame / total) * text.length * 1.4;
+        out += (i < reveal) ? text[i] : CHARS[Math.floor(Math.random() * CHARS.length)];
+      }
+      roleEl.textContent = out;
+      if(frame >= total){ clearInterval(scrambleTimer); roleEl.textContent = text; }
+    }, 34);
+  }
+  function rotateRole(){
+    var roles = currentRoles();
+    scrambleTo(roles[roleIdx % roles.length]);
+    roleIdx++;
+  }
+  rotateRole();
+  if(!reduceMotion){ rotateTimer = setInterval(rotateRole, 3200); }
+  document.querySelectorAll('.lang-toggle .opt').forEach(function(b){
+    b.addEventListener('click', function(){ roleIdx = 0; rotateRole(); });
+  });
+
+  /* ============ count-up stats ============ */
   document.querySelectorAll('.count[data-count]').forEach(function(el){
     var target = parseInt(el.getAttribute('data-count'), 10) || 0;
     if(reduceMotion){ el.textContent = target; return; }
     var run = function(){
-      var start = null, dur = 900;
+      var start = null, dur = 1100;
       function step(ts){
         if(!start) start = ts;
         var p = Math.min((ts - start) / dur, 1);
@@ -910,94 +1249,102 @@
     if('IntersectionObserver' in window){
       var io2 = new IntersectionObserver(function(entries){
         entries.forEach(function(e){ if(e.isIntersecting){ run(); io2.disconnect(); } });
-      }, {threshold:0.6});
+      }, {threshold:.5});
       io2.observe(el);
     } else { run(); }
   });
 
-  /* ---------- 3d tilt + cursor spotlight on cards ---------- */
-  document.querySelectorAll('.proj, .g-item').forEach(function(card){
+  /* ============ 3d tilt + spotlight on bento cells ============ */
+  document.querySelectorAll('.cell, .g-item').forEach(function(card){
     card.addEventListener('mousemove', function(ev){
       var r = card.getBoundingClientRect();
       var x = ev.clientX - r.left, y = ev.clientY - r.top;
       card.style.setProperty('--mx', x + 'px');
       card.style.setProperty('--my', y + 'px');
       if(reduceMotion) return;
-      var rx = ((y / r.height) - 0.5) * -6;
-      var ry = ((x / r.width) - 0.5) * 6;
-      card.style.transform = 'perspective(700px) rotateX(' + rx + 'deg) rotateY(' + ry + 'deg) translateY(-3px)';
+      var rxv = ((y / r.height) - .5) * -4;
+      var ryv = ((x / r.width) - .5) * 4;
+      card.style.transform = 'perspective(900px) rotateX(' + rxv + 'deg) rotateY(' + ryv + 'deg) translateY(-4px)';
     });
-    card.addEventListener('mouseleave', function(){
-      card.style.transform = '';
-    });
+    card.addEventListener('mouseleave', function(){ card.style.transform = ''; });
   });
 
-  /* ---------- ambient network canvas ---------- */
-  var canvas = document.getElementById('net-bg');
-  var ctx = canvas.getContext('2d');
-  var W, H, nodes, DPR = Math.min(window.devicePixelRatio || 1, 2);
-  var mouse = {x:-9999, y:-9999};
-  var running = !reduceMotion;
-
-  function resize(){
-    W = window.innerWidth; H = window.innerHeight;
-    canvas.width = W * DPR; canvas.height = H * DPR;
-    canvas.style.width = W + 'px'; canvas.style.height = H + 'px';
-    ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
-    var density = W < 640 ? 14000 : 9000;
-    var count = Math.min(90, Math.floor((W * H) / density));
-    nodes = [];
-    for(var i = 0; i < count; i++){
-      nodes.push({
-        x: Math.random() * W, y: Math.random() * H,
-        vx: (Math.random() - 0.5) * 0.25, vy: (Math.random() - 0.5) * 0.25
+  /* ============ magnetic buttons ============ */
+  if(!reduceMotion && fine){
+    document.querySelectorAll('.btn, .kbd-hint').forEach(function(b){
+      b.addEventListener('mousemove', function(ev){
+        var r = b.getBoundingClientRect();
+        var dx = ev.clientX - (r.left + r.width / 2);
+        var dy = ev.clientY - (r.top + r.height / 2);
+        b.style.transform = 'translate(' + dx * .18 + 'px,' + dy * .3 + 'px)';
       });
-    }
+      b.addEventListener('mouseleave', function(){ b.style.transform = ''; });
+    });
   }
 
-  function draw(){
-    if(!running) return;
-    ctx.clearRect(0, 0, W, H);
-    for(var i = 0; i < nodes.length; i++){
-      var n = nodes[i];
-      n.x += n.vx; n.y += n.vy;
-      if(n.x < 0 || n.x > W) n.vx *= -1;
-      if(n.y < 0 || n.y > H) n.vy *= -1;
-      var dxm = n.x - mouse.x, dym = n.y - mouse.y;
-      var dm = Math.sqrt(dxm*dxm + dym*dym);
-      if(dm < 140){ n.x += dxm / dm * 0.4; n.y += dym / dm * 0.4; }
-    }
-    for(var a = 0; a < nodes.length; a++){
-      for(var b = a + 1; b < nodes.length; b++){
-        var dx = nodes[a].x - nodes[b].x, dy = nodes[a].y - nodes[b].y;
-        var d = Math.sqrt(dx*dx + dy*dy);
-        if(d < 130){
-          ctx.strokeStyle = 'rgba(94,234,212,' + (0.16 * (1 - d / 130)) + ')';
-          ctx.lineWidth = 1;
-          ctx.beginPath();
-          ctx.moveTo(nodes[a].x, nodes[a].y);
-          ctx.lineTo(nodes[b].x, nodes[b].y);
-          ctx.stroke();
-        }
-      }
-      ctx.fillStyle = 'rgba(125,211,252,0.55)';
-      ctx.beginPath();
-      ctx.arc(nodes[a].x, nodes[a].y, 1.6, 0, Math.PI * 2);
-      ctx.fill();
-    }
-    requestAnimationFrame(draw);
-  }
-
-  window.addEventListener('resize', resize);
-  window.addEventListener('mousemove', function(ev){ mouse.x = ev.clientX; mouse.y = ev.clientY; });
-  document.addEventListener('visibilitychange', function(){
-    running = !document.hidden && !reduceMotion;
-    if(running) requestAnimationFrame(draw);
+  /* ============ stack marquee: duplicate content for seamless loop ============ */
+  document.querySelectorAll('.marquee[data-dupe]').forEach(function(m){
+    m.innerHTML += m.innerHTML;
   });
 
-  resize();
-  if(running) requestAnimationFrame(draw);
-  else { ctx.clearRect(0,0,W,H); }
+  /* ============ command palette ============ */
+  var pal = document.getElementById('palette');
+  var palInput = document.getElementById('pal-input');
+  var palList = document.getElementById('pal-list');
+  var COMMANDS = [
+    {en:'Go to: Career', ja:'移動: 職務経歴', ico:'#', run:function(){ location.hash = '#career'; }},
+    {en:'Go to: Lab', ja:'移動: 個人開発', ico:'#', run:function(){ location.hash = '#lab'; }},
+    {en:'Go to: Growth', ja:'移動: 成長の軌跡', ico:'#', run:function(){ location.hash = '#growth'; }},
+    {en:'Go to: Stack', ja:'移動: 技術スタック', ico:'#', run:function(){ location.hash = '#stack'; }},
+    {en:'Go to: Top', ja:'移動: トップ', ico:'#', run:function(){ location.hash = '#top'; }},
+    {en:'Open: GitHub profile', ja:'開く: GitHubプロフィール', ico:'↗', run:function(){ window.open('https://github.com/ultimania','_blank','noopener'); }},
+    {en:'Open: redmine_budget (OSS)', ja:'開く: redmine_budget (OSS)', ico:'↗', run:function(){ window.open('https://github.com/ultimania/redmine_budget','_blank','noopener'); }},
+    {en:'Open: this site\'s source', ja:'開く: このサイトのソース', ico:'↗', run:function(){ window.open('https://github.com/ultimania/ultimania','_blank','noopener'); }},
+    {en:'Language: 日本語', ja:'Language: 日本語', ico:'あ', run:function(){ applyLang('ja'); roleIdx = 0; rotateRole(); }},
+    {en:'Language: English', ja:'Language: English', ico:'A', run:function(){ applyLang('en'); roleIdx = 0; rotateRole(); }}
+  ];
+  var palSel = 0, palFiltered = COMMANDS;
+  function palRender(){
+    var lang = document.documentElement.getAttribute('data-lang') || 'en';
+    palList.innerHTML = '';
+    palFiltered.forEach(function(c, i){
+      var d = document.createElement('div');
+      d.className = 'pal-item' + (i === palSel ? ' sel' : '');
+      d.innerHTML = '<span class="ico">' + c.ico + '</span><span>' + (lang === 'ja' ? c.ja : c.en) + '</span>';
+      d.addEventListener('click', function(){ c.run(); palClose(); });
+      d.addEventListener('mousemove', function(){ palSel = i; palRender(); });
+      palList.appendChild(d);
+    });
+  }
+  function palFilter(){
+    var q = palInput.value.trim().toLowerCase();
+    palFiltered = COMMANDS.filter(function(c){
+      return (c.en + ' ' + c.ja).toLowerCase().indexOf(q) !== -1;
+    });
+    palSel = 0;
+    palRender();
+  }
+  function palOpenFn(){
+    pal.classList.add('open');
+    palInput.value = ''; palFilter();
+    setTimeout(function(){ palInput.focus(); }, 30);
+  }
+  function palClose(){ pal.classList.remove('open'); }
+  document.getElementById('pal-open').addEventListener('click', palOpenFn);
+  pal.addEventListener('click', function(e){ if(e.target === pal) palClose(); });
+  palInput.addEventListener('input', palFilter);
+  document.addEventListener('keydown', function(e){
+    if((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k'){
+      e.preventDefault();
+      pal.classList.contains('open') ? palClose() : palOpenFn();
+      return;
+    }
+    if(!pal.classList.contains('open')) return;
+    if(e.key === 'Escape'){ palClose(); }
+    else if(e.key === 'ArrowDown'){ e.preventDefault(); palSel = Math.min(palSel + 1, palFiltered.length - 1); palRender(); }
+    else if(e.key === 'ArrowUp'){ e.preventDefault(); palSel = Math.max(palSel - 1, 0); palRender(); }
+    else if(e.key === 'Enter'){ if(palFiltered[palSel]){ palFiltered[palSel].run(); palClose(); } }
+  });
 })();
 </script>
 
