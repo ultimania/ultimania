@@ -1,10 +1,26 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Takumi Fukaya — Engineer / AI Agent Builder</title>
-<meta name="description" content="10年間、コードも人も炎上プロジェクトも動かしてきたフルスタックエンジニア。今は自分自身の開発体制をAIエージェントで再構築している、深谷巧のポートフォリオ。">
+<title>Takumi Fukaya — Zero Trust Security Architect / AI Agent Systems Builder</title>
+<meta name="description" content="Zero Trust security architect for national-scale enterprises across automotive, insurance, legal, and government sectors. Builder of a 5-repo personal AI agent operating system. 10 years shipping, rescuing, and teaching.">
+<meta property="og:title" content="Takumi Fukaya — Zero Trust Security Architect / AI Agent Systems Builder">
+<meta property="og:description" content="10 years shipping and rescuing enterprise systems across automotive, insurance, legal, and government sectors. Now building AI agent operating systems on the side.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://ultimania.github.io/ultimania/">
+<script>
+(function(){
+  try{
+    var saved = localStorage.getItem('site-lang');
+    var lang = saved || (((navigator.language||'en').toLowerCase().indexOf('ja')===0) ? 'ja' : 'en');
+    document.documentElement.setAttribute('data-lang', lang);
+    document.documentElement.lang = lang;
+  }catch(e){
+    document.documentElement.setAttribute('data-lang','en');
+  }
+})();
+</script>
 <style>
   :root{
     --bg:#080a0f;
@@ -21,6 +37,8 @@
   }
   *{box-sizing:border-box; margin:0; padding:0;}
   html{scroll-behavior:smooth;}
+  html[data-lang="en"] .lang-ja{display:none;}
+  html[data-lang="ja"] .lang-en{display:none;}
   body{
     background:
       radial-gradient(1200px 600px at 15% -10%, rgba(94,234,212,0.08), transparent 60%),
@@ -42,11 +60,17 @@
     backdrop-filter:blur(10px);
     border-bottom:1px solid var(--line);
   }
-  nav .wrap{display:flex; align-items:center; justify-content:space-between; height:56px;}
-  nav .brand{font-family:var(--mono); font-size:14px; color:var(--accent);}
-  nav .links{display:flex; gap:20px; font-size:13px; font-family:var(--mono);}
+  nav .wrap{display:flex; align-items:center; justify-content:space-between; height:56px; gap:16px;}
+  nav .brand{font-family:var(--mono); font-size:14px; color:var(--accent); white-space:nowrap;}
+  nav .links{display:flex; align-items:center; gap:20px; font-size:13px; font-family:var(--mono);}
   nav .links a{color:var(--fg-dim); text-decoration:none;}
   nav .links a:hover{color:var(--accent);}
+  .lang-toggle{display:flex; border:1px solid var(--line); border-radius:7px; overflow:hidden; font-family:var(--mono); font-size:11px;}
+  .lang-toggle button{
+    background:transparent; border:none; color:var(--fg-dim); padding:6px 10px; cursor:pointer; font-family:inherit; font-size:inherit;
+  }
+  .lang-toggle button.active{background:var(--accent); color:#04211c; font-weight:700;}
+  @media (max-width:640px){ nav .links a:not(.lang-toggle){display:none;} }
 
   /* ---------- hero ---------- */
   header.hero{padding:96px 0 64px;}
@@ -61,12 +85,12 @@
     background:linear-gradient(120deg, var(--fg) 30%, var(--accent) 70%, var(--accent2));
     -webkit-background-clip:text; background-clip:text; color:transparent;
   }
-  .tagline{font-size:clamp(16px,2.4vw,20px); color:var(--fg-dim); max-width:680px; margin-top:18px;}
+  .tagline{font-size:clamp(16px,2.4vw,20px); color:var(--fg-dim); max-width:700px; margin-top:18px;}
   .tagline b{color:var(--fg); font-weight:600;}
 
   .stats{display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--line); border:1px solid var(--line); border-radius:10px; overflow:hidden; margin-top:40px;}
   .stat{background:var(--card); padding:18px 14px; text-align:center;}
-  .stat .num{font-family:var(--mono); font-size:26px; font-weight:700; color:var(--accent);}
+  .stat .num{font-family:var(--mono); font-size:24px; font-weight:700; color:var(--accent);}
   .stat .label{font-size:11px; color:var(--fg-dim); margin-top:4px; letter-spacing:0.02em;}
   @media (max-width:640px){.stats{grid-template-columns:repeat(2,1fr);}}
 
@@ -75,7 +99,7 @@
   .section-head{display:flex; align-items:baseline; gap:12px; margin-bottom:36px;}
   .section-head .idx{font-family:var(--mono); color:var(--fg-dim); font-size:13px;}
   .section-head h2{font-size:clamp(22px,3vw,30px); font-weight:700;}
-  .section-lead{color:var(--fg-dim); max-width:680px; margin:-24px 0 36px;}
+  .section-lead{color:var(--fg-dim); max-width:700px; margin:-24px 0 36px;}
 
   /* ---------- career cards ---------- */
   .career{display:flex; flex-direction:column; gap:0; border-left:2px solid var(--line); margin-left:8px;}
@@ -102,6 +126,7 @@
   .proj ul{margin-top:12px; padding-left:18px; color:var(--fg-dim); font-size:13.5px;}
   .proj ul li{margin-bottom:4px;}
   .proj .tags{margin-top:14px; display:flex; flex-wrap:wrap; gap:6px;}
+  .proj .link{display:inline-block; margin-top:14px; font-family:var(--mono); font-size:12.5px;}
 
   .proj.wide{grid-column:1/-1;}
 
@@ -127,7 +152,7 @@
   .closing{
     text-align:center; padding:80px 0 100px;
   }
-  .closing h2{font-size:clamp(24px,4vw,36px); font-weight:800; max-width:760px; margin:0 auto 20px;}
+  .closing h2{font-size:clamp(24px,4vw,36px); font-weight:800; max-width:780px; margin:0 auto 20px;}
   .closing p{color:var(--fg-dim); max-width:560px; margin:0 auto 32px;}
   .cta{
     display:inline-flex; gap:14px; flex-wrap:wrap; justify-content:center;
@@ -139,135 +164,375 @@
   .btn.ghost{border:1px solid var(--line); color:var(--fg);}
 
   footer{border-top:1px solid var(--line); padding:24px 0; text-align:center; color:var(--fg-dim); font-size:12px; font-family:var(--mono);}
+
+  /* ---------- ambient network background ---------- */
+  #net-bg{
+    position:fixed; inset:0; z-index:-1; width:100%; height:100%;
+    opacity:.5;
+  }
+
+  /* ---------- scroll progress ---------- */
+  #scroll-bar{
+    position:fixed; top:0; left:0; height:2px; width:0%; z-index:100;
+    background:linear-gradient(90deg, var(--accent), var(--accent2));
+    box-shadow:0 0 8px rgba(94,234,212,0.6);
+    transition:width .08s linear;
+  }
+
+  /* ---------- reveal-on-scroll ---------- */
+  .reveal{opacity:0; transform:translateY(22px); transition:opacity .7s cubic-bezier(.16,.8,.24,1), transform .7s cubic-bezier(.16,.8,.24,1);}
+  .reveal.in-view{opacity:1; transform:translateY(0);}
+
+  /* ---------- hero entrance ---------- */
+  @keyframes fadeUp{from{opacity:0; transform:translateY(18px);} to{opacity:1; transform:translateY(0);}}
+  .hero-in .name{animation:fadeUp .8s cubic-bezier(.16,.8,.24,1) .15s both;}
+  .hero-in .tagline{animation:fadeUp .8s cubic-bezier(.16,.8,.24,1) .35s both;}
+  .hero-in .stats{animation:fadeUp .8s cubic-bezier(.16,.8,.24,1) .55s both;}
+
+  h1.name{background-size:200% auto; animation:sheen 7s linear infinite;}
+  @keyframes sheen{
+    0%{background-position:0% center;}
+    100%{background-position:200% center;}
+  }
+
+  /* ---------- 3d tilt + spotlight cards ---------- */
+  .proj, .g-item{
+    position:relative;
+    transform-style:preserve-3d;
+    will-change:transform;
+    transition:transform .25s cubic-bezier(.16,.8,.24,1), border-color .2s ease, box-shadow .25s ease;
+  }
+  .proj::before, .g-item::before{
+    content:""; position:absolute; inset:0; border-radius:inherit; pointer-events:none;
+    background:radial-gradient(240px circle at var(--mx,50%) var(--my,50%), rgba(94,234,212,0.14), transparent 65%);
+    opacity:0; transition:opacity .3s ease;
+  }
+  .proj:hover::before, .g-item:hover::before{opacity:1;}
+  .proj:hover, .g-item:hover{box-shadow:0 18px 40px -18px rgba(0,0,0,0.6);}
+  .job{transition:transform .2s ease;}
+  .job:hover{transform:translateX(4px);}
+
+  /* ---------- number count-up ---------- */
+  .stat .num .count{display:inline;}
+
+  @media (prefers-reduced-motion: reduce){
+    .hero-in .name, .hero-in .tagline, .hero-in .stats, h1.name{animation:none !important;}
+    .reveal{opacity:1; transform:none; transition:none;}
+    .proj, .g-item, .job{transition:none;}
+  }
 </style>
 </head>
 <body>
+
+<canvas id="net-bg" aria-hidden="true"></canvas>
+<div id="scroll-bar" aria-hidden="true"></div>
 
 <nav>
   <div class="wrap">
     <div class="brand">~/ultimania $</div>
     <div class="links">
-      <a href="#career">career</a>
-      <a href="#lab">lab</a>
-      <a href="#growth">growth</a>
-      <a href="#stack">stack</a>
+      <a href="#career"><span class="lang-en">career</span><span class="lang-ja">職務経歴</span></a>
+      <a href="#lab"><span class="lang-en">lab</span><span class="lang-ja">個人開発</span></a>
+      <a href="#growth"><span class="lang-en">growth</span><span class="lang-ja">成長</span></a>
+      <a href="#stack"><span class="lang-en">stack</span><span class="lang-ja">スタック</span></a>
       <a href="https://github.com/ultimania" target="_blank" rel="noopener">github</a>
+      <div class="lang-toggle">
+        <button type="button" class="opt" data-lang="en">EN</button>
+        <button type="button" class="opt" data-lang="ja">日本語</button>
+      </div>
     </div>
   </div>
 </nav>
 
-<header class="hero">
+<header class="hero hero-in">
   <div class="wrap">
-    <div class="prompt">$ whoami</div>
-    <h1 class="name">Takumi Fukaya</h1>
-    <p class="tagline">
-      10年間、<b>コード</b>も<b>人</b>も<b>炎上プロジェクト</b>も動かしてきたエンジニア。
-      今は自分自身の開発チームを、<b>AIエージェント前提</b>で作り替えている。
-    </p>
+    <div class="prompt lang-en" data-type="$ whoami">$ whoami</div>
+    <div class="prompt lang-ja" data-type="$ whoami">$ whoami</div>
 
-    <div class="stats">
-      <div class="stat"><div class="num">10<span style="font-size:14px">年</span></div><div class="label">2016〜稼働中</div></div>
-      <div class="stat"><div class="num">16</div><div class="label">プロジェクト経験</div></div>
-      <div class="stat"><div class="num">5<span style="font-size:14px">repo</span></div><div class="label">個人AIエージェント基盤</div></div>
-      <div class="stat"><div class="num">0→1</div><div class="label">企画・登壇・売り込みも自分で</div></div>
+    <div class="lang-en">
+      <h1 class="name">Takumi Fukaya</h1>
+      <p class="tagline">
+        <b>Zero Trust</b> security architect for national-scale enterprises — automotive, insurance, legal, public sector.
+        On the side, I build the <b>operating systems that let AI agents work autonomously, safely, and without supervision</b>.
+        Ten years turning chaos — technical, organizational, and now agentic — into systems that hold.
+      </p>
+      <div class="stats">
+        <div class="stat"><div class="num"><span class="count" data-count="10">0</span><span style="font-size:13px">+ yrs</span></div><div class="label">production systems, 4 industries</div></div>
+        <div class="stat"><div class="num"><span class="count" data-count="16">0</span><span style="font-size:13px">+</span></div><div class="label">delivered projects</div></div>
+        <div class="stat"><div class="num">5-repo</div><div class="label">personal AI agent platform</div></div>
+        <div class="stat"><div class="num">0→1</div><div class="label">pitch, build &amp; ship it myself</div></div>
+      </div>
     </div>
+
+    <div class="lang-ja">
+      <h1 class="name">深谷 巧</h1>
+      <p class="tagline">
+        自動車・保険・法律・官公庁 — 国家規模のエンタープライズで<b>ゼロトラスト</b>のセキュリティを設計する一方、
+        個人では<b>AIエージェントが自律的かつ安全に、監視なしで動けるための"OS"</b>を作っている。
+        技術的にも、組織的にも、そして今はエージェント的にも — 混沌をシステムに変えてきた10年。
+      </p>
+      <div class="stats">
+        <div class="stat"><div class="num"><span class="count" data-count="10">0</span><span style="font-size:13px">年+</span></div><div class="label">4業界での本番システム経験</div></div>
+        <div class="stat"><div class="num"><span class="count" data-count="16">0</span><span style="font-size:13px">件+</span></div><div class="label">プロジェクト経験</div></div>
+        <div class="stat"><div class="num">5repo</div><div class="label">個人AIエージェント基盤</div></div>
+        <div class="stat"><div class="num">0→1</div><div class="label">企画・開発・売り込みも自分で</div></div>
+      </div>
+    </div>
+
   </div>
 </header>
 
 <section id="career">
   <div class="wrap">
-    <div class="section-head"><span class="idx">01</span><h2>職務の軌跡 — 手を動かし、火を消し、売り、導いた10年</h2></div>
-    <p class="section-lead">
-      SIerでコードを書くところから始まり、プロジェクトマネジメント、DevOps推進、自社ソリューションの企画〜販促、
-      炎上プロジェクトの立て直し、そして直近はゼロトラスト前提の全社API基盤PoCまで。
-      「作る」だけでなく「立て直す」「売る」「教える」も担当してきた。
-    </p>
+    <div class="lang-en">
+      <div class="section-head"><span class="idx">01</span><h2>Track record — built, rescued, sold, and led for a decade</h2></div>
+      <p class="section-lead">
+        From OSS customization at an SIer to leading a Zero Trust PoC for a national automaker — with a project
+        turnaround, a standing technical-advisor seat at a top-tier life insurer, and a Snowflake data platform for
+        a major law firm along the way. I don't just build. I rescue projects, sell solutions, and teach engineers.
+      </p>
+    </div>
+    <div class="lang-ja">
+      <div class="section-head"><span class="idx">01</span><h2>職務の軌跡 — 手を動かし、火を消し、売り、導いた10年</h2></div>
+      <p class="section-lead">
+        SIerでOSSカスタマイズを書くところから始まり、大手自動車メーカーのゼロトラストPoCを主導するまで。
+        道中には炎上プロジェクトの立て直し、大手生保システム会社での技術アドバイザ職、大手弁護士事務所向けの
+        Snowflakeデータ基盤構築も。「作る」だけでなく「立て直す」「売る」「教える」も担当してきた。
+      </p>
+    </div>
 
     <div class="career">
 
-      <div class="job">
+      <div class="job reveal">
         <div class="period">2024.11 – 2025.10</div>
-        <h3>大手自動車メーカー — 全社API開発プラットフォームPoC（テックリード）</h3>
-        <p>
-          ゼロトラストを前提としたセキュアなAPI連携基盤のアーキテクチャ検討・PoCを主導。
-          Apigeeによる API ガバナンス（利用状況可視化・レートリミット）、EntraID上でのOAuth2.0/OIDC実装によるSSO/MFA、
-          RBAC/ABACによる認可設計までを一気通貫で構築し、顧客評価を獲得。
-        </p>
+        <div class="lang-en">
+          <h3>National Automaker — Zero Trust API Platform PoC (Tech Lead)</h3>
+          <p>
+            Led architecture and PoC for a company-wide secure API platform. Delivered API governance and
+            observability on Apigee, OAuth2.0/OIDC-based SSO/MFA on EntraID, and RBAC/ABAC authorization design
+            end-to-end — earning direct client sign-off on technical feasibility.
+          </p>
+        </div>
+        <div class="lang-ja">
+          <h3>大手自動車メーカー — 全社API開発プラットフォームPoC（テックリード）</h3>
+          <p>
+            ゼロトラストを前提としたセキュアなAPI連携基盤のアーキテクチャ検討・PoCを主導。
+            Apigeeによる API ガバナンス（利用状況可視化・レートリミット）、EntraID上でのOAuth2.0/OIDC実装によるSSO/MFA、
+            RBAC/ABACによる認可設計までを一気通貫で構築し、顧客評価を獲得。
+          </p>
+        </div>
         <div class="tags">
           <span class="tag">AWS</span><span class="tag">React</span><span class="tag">Apigee</span>
           <span class="tag">OAuth2.0 / OIDC</span><span class="tag">Zero Trust</span><span class="tag">EntraID</span>
         </div>
       </div>
 
-      <div class="job">
-        <div class="period">2025.07 – 2026.06 ／ 2025.05 – 2025.08</div>
-        <h3>損保代理店評価システム新規開発 ／ 省庁向け新法対応・申請管理システム開発</h3>
-        <p>
-          AWS・Vue.js・TypeScriptでの新規開発をテックリードとして担当し、オフライン環境での拡張性・保守性を考慮した
-          Lambda向け独自フレームワークを設計。並行して省庁案件ではAWS・Go・Reactで新規開発し、
-          チームにGitHub Copilotを導入してAI駆動開発を実践。
-        </p>
+      <div class="job reveal">
+        <div class="period">2025.07 – 2026.06</div>
+        <div class="lang-en">
+          <h3>Insurance Agency Evaluation System — New Build (Tech Lead)</h3>
+          <p>
+            Tech-led a greenfield build on AWS, Vue.js, and TypeScript. Designed a custom Lambda framework
+            for offline-capable environments, prioritizing extensibility and long-term maintainability.
+          </p>
+        </div>
+        <div class="lang-ja">
+          <h3>損保代理店評価システム新規開発（テックリード）</h3>
+          <p>
+            AWS・Vue.js・TypeScriptでの新規開発をテックリードとして担当。オフライン環境での拡張性・保守性を
+            考慮したLambda向け独自フレームワークを設計。
+          </p>
+        </div>
         <div class="tags">
-          <span class="tag">Vue.js</span><span class="tag">TypeScript</span><span class="tag">Go</span>
-          <span class="tag">AWS Lambda</span><span class="tag">GitHub Copilot</span>
+          <span class="tag">Vue.js</span><span class="tag">TypeScript</span><span class="tag">AWS Lambda</span>
         </div>
       </div>
 
-      <div class="job">
+      <div class="job reveal">
+        <div class="period">2025.05 – 2025.08</div>
+        <div class="lang-en">
+          <h3>Government New-Law Application System + AI-Driven Dev Rollout</h3>
+          <p>
+            Built a new application-management system (AWS, Go, React) for a government agency's new-law
+            compliance process, while introducing GitHub Copilot to the team and driving AI-assisted
+            engineering practice adoption from the inside.
+          </p>
+        </div>
+        <div class="lang-ja">
+          <h3>省庁向け新法対応・申請管理システム開発 ＋ AI駆動開発の社内導入</h3>
+          <p>
+            AWS・Go・Reactで省庁向け新法対応の申請管理システムを新規開発。並行してチームにGitHub Copilotを
+            導入し、AI駆動開発の実践・定着を現場から推進。
+          </p>
+        </div>
+        <div class="tags">
+          <span class="tag">Go</span><span class="tag">React</span><span class="tag">AWS</span><span class="tag">GitHub Copilot</span>
+        </div>
+      </div>
+
+      <div class="job reveal">
+        <div class="period">2024.12 – 2025.04</div>
+        <div class="lang-en">
+          <h3>Major Law Firm — Data Platform on Snowflake × AWS</h3>
+          <p>
+            Built a data collection and analysis platform on Snowflake and AWS, and rewrote legacy
+            Excel-driven analysis SQL for performance, replacing manual spreadsheet workflows with a
+            queryable warehouse.
+          </p>
+        </div>
+        <div class="lang-ja">
+          <h3>大手弁護士事務所 — Snowflake × AWS データ活用基盤構築</h3>
+          <p>
+            Snowflake x AWSを使ったデータ収集・分析基盤を構築し、既存のエクセルデータ分析用SQLの
+            パフォーマンスを改善。
+          </p>
+        </div>
+        <div class="tags">
+          <span class="tag">Snowflake</span><span class="tag">AWS</span><span class="tag">SQL</span>
+        </div>
+      </div>
+
+      <div class="job reveal">
         <div class="period">2023.11 – 2024.11</div>
-        <h3>共済団体システム基盤更改 — 炎上プロジェクトの立て直し（テックリード）</h3>
-        <p>
-          低品質・高コスト・技術知見不足・スケジュール遅延で炎上していたプロジェクトに参画し、
-          現場実態調査から品質強化策・コスト削減策の策定・推進までを担当。
-          全チーム横断の相談窓口として成果物レビューを行い、期日通りの納品と評価向上を実現。
-        </p>
+        <div class="lang-en">
+          <h3>Mutual-Aid System Infra Renewal — Project Turnaround (Tech Lead)</h3>
+          <p>
+            Took over a project failing on quality, cost, expertise, and schedule. Ran on-site diagnostics,
+            designed and drove quality and cost-reduction measures, and served as the cross-team technical
+            escalation point — delivering on time with restored quality.
+          </p>
+        </div>
+        <div class="lang-ja">
+          <h3>共済団体システム基盤更改 — 炎上プロジェクトの立て直し（テックリード）</h3>
+          <p>
+            低品質・高コスト・技術知見不足・スケジュール遅延で炎上していたプロジェクトに参画し、
+            現場実態調査から品質強化策・コスト削減策の策定・推進までを担当。
+            全チーム横断の相談窓口として成果物レビューを行い、期日通りの納品と評価向上を実現。
+          </p>
+        </div>
         <div class="tags">
           <span class="tag">Linux / Windows</span><span class="tag">PowerShell</span><span class="tag">Bash</span>
-          <span class="tag">運用設計</span><span class="tag">プロジェクト立て直し</span>
+          <span class="tag">Project turnaround</span>
         </div>
       </div>
 
-      <div class="job">
+      <div class="job reveal">
+        <div class="period">2023.09 – 2024.11</div>
+        <div class="lang-en">
+          <h3>Major Life Insurer — Technical Advisor (concurrent engagement)</h3>
+          <p>
+            Reviewed private-cloud enhancement proposals and application deliverables (design docs, test
+            specs) from a technical standpoint, and ran a running technical clinic. Within the first month,
+            five separate project teams had already brought in issues for review.
+          </p>
+        </div>
+        <div class="lang-ja">
+          <h3>大手生保システム会社様 — 技術アドバイザ（上記案件と並行担当）</h3>
+          <p>
+            社内プライベートクラウド環境のエンハンスに際して作成した調査・検討資料や、アプリケーション
+            開発成果物（設計書・テスト仕様書等）へのレビュー・技術提言を担当。技術相談会を開催し、
+            参画から1ヶ月足らずで既に5プロジェクトから相談が持ち込まれた。
+          </p>
+        </div>
+        <div class="tags">
+          <span class="tag">Private Cloud</span><span class="tag">Design Review</span><span class="tag">Technical Advisory</span>
+        </div>
+      </div>
+
+      <div class="job reveal">
         <div class="period">2022.10 – 2023.10</div>
-        <h3>データ分析ソリューションの企画・開発・販促（0→1のキーパーソン）</h3>
-        <p>
-          自社ソリューションの企画立ち上げから技術選定、要件定義〜実装〜テスト、
-          さらに企業向けウェビュー登壇（四半期3回、メインスピーカー）・プリセールスまでを一貫して主導。
-          Kubernetes + OSSでベンダーロックを回避したモダンデータスタックを構築し、IaCでワンステップ導入を実現。
-          通算5社から引き合い、うち3社と商談。
-        </p>
+        <div class="lang-en">
+          <h3>Data Analytics Solution — 0→1 Founder Role</h3>
+          <p>
+            Led company's in-house data-analytics solution end-to-end: grand design, technology selection,
+            requirements through implementation and testing, plus enterprise webinars (as lead speaker,
+            quarterly) and pre-sales. Built on Kubernetes + OSS to stay vendor-neutral, with IaC for
+            one-step deployment. Drew inbound interest from 5 companies, 3 of them in active deal talks.
+          </p>
+        </div>
+        <div class="lang-ja">
+          <h3>データ分析ソリューション企画・開発・販促（0→1のキーパーソン）</h3>
+          <p>
+            自社ソリューションの企画立ち上げから技術選定、要件定義〜実装〜テスト、
+            さらに企業向けウェビナー登壇（四半期3回、メインスピーカー）・プリセールスまでを一貫して主導。
+            Kubernetes + OSSでベンダーロックを回避したモダンデータスタックを構築し、IaCでワンステップ導入を実現。
+            通算5社から引き合い、うち3社と商談。
+          </p>
+        </div>
         <div class="tags">
           <span class="tag">Kubernetes</span><span class="tag">OSS</span><span class="tag">IaC</span>
-          <span class="tag">事業企画</span><span class="tag">登壇</span>
+          <span class="tag">Product founder</span><span class="tag">Public speaking</span>
         </div>
       </div>
 
-      <div class="job">
+      <div class="job reveal">
         <div class="period">2021.06 – 2022.09</div>
-        <h3>コンシューマー向け飲食店予約サービス — マイクロサービス開発</h3>
-        <p>
-          不正利用検知APIを要件定義からリリースまで単独開発。不正データ検知バッチは、
-          あえてSpringBatchではなくBashで実装しコンテナイメージを大幅にスリム化、起動時間を他バッチより1〜3分短縮。
-          使いやすさと安定性が評価され、部署全体で採用される規模に成長。
-        </p>
+        <div class="lang-en">
+          <h3>Consumer Restaurant-Reservation Service — Microservices</h3>
+          <p>
+            Solo-built a fraud-detection API, from requirements to release. Implemented the fraud-detection
+            batch job in Bash instead of the team's default SpringBatch, shrinking the container image and
+            cutting startup time by 1–3 minutes versus other batches — adopted department-wide.
+          </p>
+        </div>
+        <div class="lang-ja">
+          <h3>コンシューマー向け飲食店予約サービス — マイクロサービス開発</h3>
+          <p>
+            不正利用検知APIを要件定義からリリースまで単独開発。不正データ検知バッチは、
+            あえてSpringBatchではなくBashで実装しコンテナイメージを大幅にスリム化、起動時間を他バッチより1〜3分短縮。
+            使いやすさと安定性が評価され、部署全体で採用される規模に成長。
+          </p>
+        </div>
         <div class="tags">
           <span class="tag">SpringBoot</span><span class="tag">Java</span><span class="tag">Bash</span>
-          <span class="tag">マイクロサービス</span><span class="tag">Dynatrace</span>
+          <span class="tag">Microservices</span><span class="tag">Dynatrace</span>
         </div>
       </div>
 
-      <div class="job">
+      <div class="job reveal">
+        <div class="period">2020.10 – 2021.05</div>
+        <div class="lang-en">
+          <h3>DevOps Trend R&amp;D + Internal Enablement</h3>
+          <p>
+            Researched emerging DevOps practices and led a monthly internal seminar series (~100 attendees
+            over 3 months) as main speaker — IaC, distributed VCS, CI/CD, metrics, chatbots. Built a live
+            chat app to let attendees hands-on experience feature flags and chatbots, not just watch slides.
+          </p>
+        </div>
+        <div class="lang-ja">
+          <h3>DevOps最新動向に関する調査・検証と社内技術の推進</h3>
+          <p>
+            DevOpsに関連する技術トレンドの調査・検証を行い、月次技術セミナー（3ヶ月・延べ約100名参加）で
+            メインスピーカーを務めた。チャットボット・フィーチャーフラグ回では、受講者が実際に触れる
+            チャットアプリを自作し、体感型のセミナーを実現。
+          </p>
+        </div>
+        <div class="tags">
+          <span class="tag">IaC</span><span class="tag">CI/CD</span><span class="tag">Public speaking</span>
+        </div>
+      </div>
+
+      <div class="job reveal">
         <div class="period">2016.04 – 2020.09</div>
-        <h3>SIer黎明期 — OSSカスタマイズからPMまで</h3>
-        <p>
-          OpenStack Keystone（Python）、OpenAM/OpenIG（Java/Spring）といったIdP/クラウド基盤OSSのカスタマイズ開発から
-          キャリアを開始。その後、共済システム基盤更改・保守案件でプロジェクトマネジメント全般
-          （計画立案・見積もり・要員管理・顧客折衝）を経験し、DevOps推進では月次技術セミナー
-          （延べ約100名参加）のメインスピーカーを務めた。
-        </p>
+        <div class="lang-en">
+          <h3>Early SIer Years — OSS Internals to Project Management</h3>
+          <p>
+            Started out customizing IdP/cloud OSS — OpenStack Keystone (Python), OpenAM/OpenIG
+            (Java/Spring) — then moved into full-cycle PM (planning, estimation, staffing, client
+            negotiation) on mutual-aid system infrastructure renewal and maintenance.
+          </p>
+        </div>
+        <div class="lang-ja">
+          <h3>SIer黎明期 — OSSカスタマイズからPMまで</h3>
+          <p>
+            OpenStack Keystone（Python）、OpenAM/OpenIG（Java/Spring）といったIdP/クラウド基盤OSSのカスタマイズ開発から
+            キャリアを開始。その後、共済システム基盤更改・保守案件でプロジェクトマネジメント全般
+            （計画立案・見積もり・要員管理・顧客折衝）を経験した。
+          </p>
+        </div>
         <div class="tags">
           <span class="tag">Python</span><span class="tag">Java / Spring</span><span class="tag">C#.NET</span>
-          <span class="tag">PM</span><span class="tag">DevOps</span>
+          <span class="tag">PM</span>
         </div>
       </div>
 
@@ -277,90 +542,170 @@
 
 <section id="lab" style="background:linear-gradient(180deg,transparent,rgba(94,234,212,0.03),transparent);">
   <div class="wrap">
-    <div class="section-head"><span class="idx">02</span><h2>個人で作っているもの — AIエージェント時代への自己アップデート</h2></div>
-    <p class="section-lead">
-      業務の外側で、自分専用のAIエージェント基盤・評価の仕組み・スペック駆動開発の実験場を自作している。
-      「AIを使う」ではなく「AIエージェントが安全に自律稼働できる仕組み自体」を作っているのが特徴。
-    </p>
+    <div class="lang-en">
+      <div class="section-head"><span class="idx">02</span><h2>What I build on my own — self-upgrading for the AI-agent era</h2></div>
+      <p class="section-lead">
+        Outside client work, I build my own AI agent infrastructure, evaluation harnesses, and a spec-driven
+        development testbed. Not just "using AI" — building the systems that let AI agents run autonomously
+        and safely, which is the harder, less-glamorous problem enterprises will need solved next.
+      </p>
+    </div>
+    <div class="lang-ja">
+      <div class="section-head"><span class="idx">02</span><h2>個人で作っているもの — AIエージェント時代への自己アップデート</h2></div>
+      <p class="section-lead">
+        業務の外側で、自分専用のAIエージェント基盤・評価の仕組み・スペック駆動開発の実験場を自作している。
+        「AIを使う」ではなく「AIエージェントが安全に自律稼働できる仕組み自体」を作っているのが特徴。
+      </p>
+    </div>
 
     <div class="grid">
 
-      <div class="proj wide">
+      <div class="proj wide reveal">
         <div class="k">PERSONAL AGENT PLATFORM</div>
-        <h3>tsumugi — 個人用マルチリポジトリAIエージェント基盤</h3>
-        <p>
-          約4ヶ月で並行構築した5リポジトリ構成のパーソナルAI基盤。中核の <code>tsumugi-ai</code> は
-          CrewAI + FastAPI + Ollamaで9系統のCLI（調査・ToDo分解・週次レビュー・健康ログ要約など）を提供し、
-          Slack/Notion連携用にPostgreSQL（Alembic管理）とOpenTelemetryによる分散トレーシングまで実装。
-          <code>tsumugi-rag-teams</code> はMicrosoft Graph API経由でTeamsのチャネル履歴を同期し、
-          Qdrant + sentence-transformersでベクトル検索可能にする独立RAGサービス。
-          <code>tsumugi-desktop</code> はSwiftUI製のネイティブmacOSデスクトップマスコットで、
-          HTTP経由でエージェントAPIと対話する薄いUI層（Swiftテスト99件）。
-          <code>tsumugi-governance</code> は5段階の強制レイヤー（pre-commit/CI/hook/runtime/manual review）で
-          ルールを機械検証可能にし、全サブリポジトリへ配布するガバナンス基盤。
-        </p>
-        <ul>
-          <li>Python(CrewAI/FastAPI) / Swift(SwiftUI) / Qdrant / OpenTelemetry / MS Graph API</li>
-          <li>「使う」だけでなく「複数エージェントを統治する仕組み」自体を設計・実装</li>
-        </ul>
+        <div class="lang-en">
+          <h3>tsumugi — a personal multi-repo AI agent platform</h3>
+          <p>
+            A 5-repo personal AI stack built out over ~4 months in parallel. The core, <code>tsumugi-ai</code>,
+            runs 9 CLI workflows (research, task decomposition, weekly review, health-log summarization, and
+            more) on CrewAI + FastAPI + Ollama, backed by PostgreSQL (Alembic-managed) and OpenTelemetry
+            distributed tracing. <code>tsumugi-rag-teams</code> is a standalone RAG service that syncs Microsoft
+            Teams channel history via Graph API into Qdrant + sentence-transformers for vector search.
+            <code>tsumugi-desktop</code> is a native macOS SwiftUI mascot app (99 Swift tests) that talks to the
+            agent API over HTTP. <code>tsumugi-governance</code> enforces shared rules across every sub-repo
+            through 5 layers — pre-commit, CI, hooks, runtime, and manual review.
+          </p>
+          <ul>
+            <li>Python (CrewAI/FastAPI) / Swift (SwiftUI) / Qdrant / OpenTelemetry / MS Graph API</li>
+            <li>Not just "using" agents — designing the system that governs multiple agents at once</li>
+          </ul>
+        </div>
+        <div class="lang-ja">
+          <h3>tsumugi — 個人用マルチリポジトリAIエージェント基盤</h3>
+          <p>
+            約4ヶ月で並行構築した5リポジトリ構成のパーソナルAI基盤。中核の <code>tsumugi-ai</code> は
+            CrewAI + FastAPI + Ollamaで9系統のCLI（調査・ToDo分解・週次レビュー・健康ログ要約など）を提供し、
+            Slack/Notion連携用にPostgreSQL（Alembic管理）とOpenTelemetryによる分散トレーシングまで実装。
+            <code>tsumugi-rag-teams</code> はMicrosoft Graph API経由でTeamsのチャネル履歴を同期し、
+            Qdrant + sentence-transformersでベクトル検索可能にする独立RAGサービス。
+            <code>tsumugi-desktop</code> はSwiftUI製のネイティブmacOSデスクトップマスコットで、
+            HTTP経由でエージェントAPIと対話する薄いUI層（Swiftテスト99件）。
+            <code>tsumugi-governance</code> は5段階の強制レイヤー（pre-commit/CI/hook/runtime/manual review）で
+            ルールを機械検証可能にし、全サブリポジトリへ配布するガバナンス基盤。
+          </p>
+          <ul>
+            <li>Python(CrewAI/FastAPI) / Swift(SwiftUI) / Qdrant / OpenTelemetry / MS Graph API</li>
+            <li>「使う」だけでなく「複数エージェントを統治する仕組み」自体を設計・実装</li>
+          </ul>
+        </div>
         <div class="tags">
           <span class="tag">CrewAI</span><span class="tag">FastAPI</span><span class="tag">Ollama</span>
           <span class="tag">Qdrant / RAG</span><span class="tag">SwiftUI</span><span class="tag">OpenTelemetry</span>
         </div>
       </div>
 
-      <div class="proj">
+      <div class="proj reveal">
         <div class="k">AI GOVERNANCE EXPERIMENT</div>
-        <h3>AIエージェントの"憲法"設計</h3>
-        <p>
-          安価なモデルでもフロンティアモデルと同等の判断規律で自律稼働できるようにするため、
-          決定優先順位・証拠規律・停止条件を明文化したガイダンス文書（338行・22章）と、
-          判断基準集（134行・12節）を設計。最小権限のサブエージェント定義8種を実装し、
-          モデル間のペア比較をブラインド化する比較手順も構築した。
+        <div class="lang-en">
+          <h3>Designing a "constitution" for AI agents</h3>
+          <p>
+            This very page is served from that experiment. To let cheaper models operate with frontier-model
+            discipline, I authored a 338-line, 22-chapter operating charter (decision priority, evidence
+            discipline, stop conditions) and a 134-line, 12-section decision-heuristics reference, plus 8
+            least-privilege sub-agent definitions and a blinded model-comparison protocol.
+          </p>
+        </div>
+        <div class="lang-ja">
+          <h3>AIエージェントの"憲法"設計</h3>
+          <p>
+            このページ自体が、その実験リポジトリから配信されている。安価なモデルでもフロンティアモデルと
+            同等の判断規律で自律稼働できるようにするため、決定優先順位・証拠規律・停止条件を明文化した
+            ガイダンス文書（338行・22章）と、判断基準集（134行・12節）を設計。最小権限のサブエージェント
+            定義8種を実装し、モデル間のペア比較をブラインド化する比較手順も構築した。
+          </p>
+        </div>
+        <p class="note lang-en">
+          Round-by-round scores in the working log are self-reported and not claimed here. This page states
+          only what's independently verifiable — the documents, sub-agent definitions, and comparison
+          protocol that actually exist in the repo.
         </p>
-        <p class="note">
+        <p class="note lang-ja">
           ※ 進行ログ上のラウンド別スコアは自己申告であり、本サイトでは独立検証できた
           「実在する文書・エージェント定義・比較手順」のみを事実として記載している。
         </p>
+        <a class="link lang-en" href="https://github.com/ultimania/ultimania" target="_blank" rel="noopener">View source on GitHub →</a>
+        <a class="link lang-ja" href="https://github.com/ultimania/ultimania" target="_blank" rel="noopener">GitHubでソースを見る →</a>
         <div class="tags">
           <span class="tag">Prompt Engineering</span><span class="tag">Claude Code</span><span class="tag">Sub-agent Design</span>
         </div>
       </div>
 
-      <div class="proj">
+      <div class="proj reveal">
         <div class="k">SPEC-DRIVEN DEV RESEARCH</div>
-        <h3>spec-backborn — スペック駆動開発の実験基盤</h3>
-        <p>
-          スペック駆動開発という手法自体を研究するプラットフォーム。1週間弱で2,211コミットを積み上げ、
-          Backstage IDP・RBAC・OTel可観測性・codegraph・Azureデプロイなど300を超えるサブ仕様を管理。
-          Next.js 15 + Prisma 6 + PostgreSQL 16 + Vitest(Testcontainers) + Playwrightで実装検証まで行う。
-        </p>
+        <div class="lang-en">
+          <h3>spec-backborn — a testbed for spec-driven development</h3>
+          <p>
+            A research platform for spec-driven development itself: 2,211 commits in under a week, managing
+            300+ sub-specs across a Backstage IDP, RBAC, OTel observability, codegraph, and Azure deployment.
+            Built with Next.js 15 + Prisma 6 + PostgreSQL 16 + Vitest (Testcontainers) + Playwright, verified
+            end-to-end.
+          </p>
+        </div>
+        <div class="lang-ja">
+          <h3>spec-backborn — スペック駆動開発の実験基盤</h3>
+          <p>
+            スペック駆動開発という手法自体を研究するプラットフォーム。1週間弱で2,211コミットを積み上げ、
+            Backstage IDP・RBAC・OTel可観測性・codegraph・Azureデプロイなど300を超えるサブ仕様を管理。
+            Next.js 15 + Prisma 6 + PostgreSQL 16 + Vitest(Testcontainers) + Playwrightで実装検証まで行う。
+          </p>
+        </div>
         <div class="tags">
           <span class="tag">Next.js 15</span><span class="tag">Prisma</span><span class="tag">Testcontainers</span>
         </div>
       </div>
 
-      <div class="proj">
+      <div class="proj reveal">
         <div class="k">ITERATIVE BUILD</div>
-        <h3>NEXUS TRADE — マルチブローカーAIトレーディングダッシュボード</h3>
-        <p>
-          同一プロダクトを3世代にわたって反復開発。最新版は60コミット・約9,744行まで成長し、
-          SQLiteでの永続化・学習ループ・EOD評価まで実装済み。SBI/楽天/マネックスはペーパートレード、
-          auカブコムはPlaywrightによるブラウザ自動操作で実発注に対応するブローカーアダプタ構成。
-        </p>
+        <div class="lang-en">
+          <h3>NEXUS TRADE — multi-broker AI trading dashboard</h3>
+          <p>
+            The same product rebuilt across 3 generations. The latest sits at 60 commits / ~9,744 lines, with
+            SQLite persistence, a learning loop, and end-of-day evaluation. SBI, Rakuten, and Monex run as
+            paper-trading adapters; au Kabucom places real orders via Playwright browser automation.
+          </p>
+        </div>
+        <div class="lang-ja">
+          <h3>NEXUS TRADE — マルチブローカーAIトレーディングダッシュボード</h3>
+          <p>
+            同一プロダクトを3世代にわたって反復開発。最新版は60コミット・約9,744行まで成長し、
+            SQLiteでの永続化・学習ループ・EOD評価まで実装済み。SBI/楽天/マネックスはペーパートレード、
+            auカブコムはPlaywrightによるブラウザ自動操作で実発注に対応するブローカーアダプタ構成。
+          </p>
+        </div>
         <div class="tags">
           <span class="tag">Node.js / Express</span><span class="tag">WebSocket</span><span class="tag">Playwright</span>
           <span class="tag">React / TanStack</span>
         </div>
       </div>
 
-      <div class="proj">
+      <div class="proj reveal">
         <div class="k">SHIPPED OSS</div>
-        <h3>redmine_budget — 公開OSS（Redmineプラグイン）</h3>
-        <p>
-          チケットごとの予定工数を期間按分してカレンダー表示し、実績工数と突き合わせて予実を可視化するプラグイン。
-          GitHub上でスターの付いた公開OSSとして、Redmine 5.1.1以降に対応し継続メンテナンス中。
-        </p>
+        <div class="lang-en">
+          <h3>redmine_budget — public OSS Redmine plugin</h3>
+          <p>
+            Prorates each ticket's planned effort across its period and displays it on a calendar against
+            actuals, visualizing plan-vs-actual at a glance. Public on GitHub, starred, and actively
+            maintained for Redmine 5.1.1+.
+          </p>
+        </div>
+        <div class="lang-ja">
+          <h3>redmine_budget — 公開OSS（Redmineプラグイン）</h3>
+          <p>
+            チケットごとの予定工数を期間按分してカレンダー表示し、実績工数と突き合わせて予実を可視化するプラグイン。
+            GitHub上でスターの付いた公開OSSとして、Redmine 5.1.1以降に対応し継続メンテナンス中。
+          </p>
+        </div>
+        <a class="link lang-en" href="https://github.com/ultimania/redmine_budget" target="_blank" rel="noopener">View on GitHub →</a>
+        <a class="link lang-ja" href="https://github.com/ultimania/redmine_budget" target="_blank" rel="noopener">GitHubで見る →</a>
         <div class="tags">
           <span class="tag">Ruby</span><span class="tag">Redmine Plugin</span><span class="tag">GPLv2</span>
         </div>
@@ -372,21 +717,52 @@
 
 <section id="growth">
   <div class="wrap">
-    <div class="section-head"><span class="idx">03</span><h2>成長の軌跡</h2></div>
-    <p class="section-lead">Android/Javaの基礎学習から、IoT、モダンフロントエンド、そしてAIエージェント協働によるインフラ移行まで。</p>
+    <div class="lang-en">
+      <div class="section-head"><span class="idx">03</span><h2>Growth timeline</h2></div>
+      <p class="section-lead">From Android/Java fundamentals through IoT, modern frontend, and now AI-agent-assisted infrastructure migration.</p>
+    </div>
+    <div class="lang-ja">
+      <div class="section-head"><span class="idx">03</span><h2>成長の軌跡</h2></div>
+      <p class="section-lead">Android/Javaの基礎学習から、IoT、モダンフロントエンド、そしてAIエージェント協働によるインフラ移行まで。</p>
+    </div>
     <div class="growth">
-      <div class="g-item"><div class="yr">2017</div><h4>Java / Android</h4><p>画像変換ツール・4目並べゲームで基礎固め</p></div>
-      <div class="g-item"><div class="yr">2019</div><h4>Python / Django</h4><p>Web開発・DB設計の学習用アプリを構築</p></div>
-      <div class="g-item"><div class="yr">2021</div><h4>IoT / Docker</h4><p>Raspberry Piの自動水やりシステムをDocker化、fluentdでログ収集、カメラ画像送信まで実装</p></div>
-      <div class="g-item"><div class="yr">2023</div><h4>React / Next.js</h4><p>モダンフロントエンドへ移行、TypeScript化</p></div>
-      <div class="g-item"><div class="yr">2026</div><h4>AIエージェント協働インフラ移行</h4><p>企業サイト群をXServer/AWSからAzureへ。Front Door+WAF設計をAIエージェントと協働し、作業ログ・自動化スクリプトごと管理</p></div>
+      <div class="g-item reveal">
+        <div class="yr">2017</div>
+        <div class="lang-en"><h4>Java / Android</h4><p>Built an image converter and a Connect-Four game to nail the fundamentals</p></div>
+        <div class="lang-ja"><h4>Java / Android</h4><p>画像変換ツール・4目並べゲームで基礎固め</p></div>
+      </div>
+      <div class="g-item reveal">
+        <div class="yr">2019</div>
+        <div class="lang-en"><h4>Python / Django</h4><p>Built learning apps to study web development and DB design</p></div>
+        <div class="lang-ja"><h4>Python / Django</h4><p>Web開発・DB設計の学習用アプリを構築</p></div>
+      </div>
+      <div class="g-item reveal">
+        <div class="yr">2021</div>
+        <div class="lang-en"><h4>IoT / Docker</h4><p>Dockerized a Raspberry Pi auto-watering system with fluentd log collection and camera image upload</p></div>
+        <div class="lang-ja"><h4>IoT / Docker</h4><p>Raspberry Piの自動水やりシステムをDocker化、fluentdでログ収集、カメラ画像送信まで実装</p></div>
+      </div>
+      <div class="g-item reveal">
+        <div class="yr">2023</div>
+        <div class="lang-en"><h4>React / Next.js</h4><p>Moved to modern frontend, adopted TypeScript throughout</p></div>
+        <div class="lang-ja"><h4>React / Next.js</h4><p>モダンフロントエンドへ移行、TypeScript化</p></div>
+      </div>
+      <div class="g-item reveal">
+        <div class="yr">2026</div>
+        <div class="lang-en"><h4>AI-agent-assisted infra migration</h4><p>Migrating company sites from XServer/AWS to Azure — designing Front Door + WAF alongside an AI agent, with full work logs and automation scripts under version control</p></div>
+        <div class="lang-ja"><h4>AIエージェント協働インフラ移行</h4><p>企業サイト群をXServer/AWSからAzureへ。Front Door+WAF設計をAIエージェントと協働し、作業ログ・自動化スクリプトごと管理</p></div>
+      </div>
     </div>
   </div>
 </section>
 
 <section id="stack">
   <div class="wrap">
-    <div class="section-head"><span class="idx">04</span><h2>技術スタック</h2></div>
+    <div class="lang-en">
+      <div class="section-head"><span class="idx">04</span><h2>Stack</h2></div>
+    </div>
+    <div class="lang-ja">
+      <div class="section-head"><span class="idx">04</span><h2>技術スタック</h2></div>
+    </div>
     <div class="stack-grid">
       <div class="stack-cat">
         <h4>Languages</h4>
@@ -430,11 +806,17 @@
 
 <div class="closing">
   <div class="wrap">
-    <h2>作るのも、立て直すのも、売り込むのも。<br>ひと通り、自分でやってきた。</h2>
-    <p>次にAIエージェント前提の開発体制を作るのは、あなたのチームかもしれない。</p>
+    <div class="lang-en">
+      <h2>Built it, rescued it, sold it, taught it. All of it, myself.</h2>
+      <p>The next team to run AI-agent-first engineering might be yours.</p>
+    </div>
+    <div class="lang-ja">
+      <h2>作るのも、立て直すのも、売り込むのも。<br>ひと通り、自分でやってきた。</h2>
+      <p>次にAIエージェント前提の開発体制を作るのは、あなたのチームかもしれない。</p>
+    </div>
     <div class="cta">
-      <a class="btn primary" href="https://github.com/ultimania" target="_blank" rel="noopener">GitHubを見る →</a>
-      <a class="btn ghost" href="#career">職務経歴を見る</a>
+      <a class="btn primary" href="https://github.com/ultimania" target="_blank" rel="noopener"><span class="lang-en">View GitHub →</span><span class="lang-ja">GitHubを見る →</span></a>
+      <a class="btn ghost" href="#career"><span class="lang-en">Career details</span><span class="lang-ja">職務経歴を見る</span></a>
     </div>
   </div>
 </div>
@@ -442,6 +824,182 @@
 <footer>
   <div class="wrap">built &amp; deployed by ultimania — github pages / 2026</div>
 </footer>
+
+<script>
+(function(){
+  var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------- language toggle ---------- */
+  function apply(lang){
+    document.documentElement.setAttribute('data-lang', lang);
+    document.documentElement.lang = lang;
+    document.querySelectorAll('.lang-toggle .opt').forEach(function(b){
+      b.classList.toggle('active', b.dataset.lang === lang);
+    });
+    try{ localStorage.setItem('site-lang', lang); }catch(e){}
+  }
+  apply(document.documentElement.getAttribute('data-lang') || 'en');
+  document.querySelectorAll('.lang-toggle .opt').forEach(function(b){
+    b.addEventListener('click', function(){ apply(b.dataset.lang); });
+  });
+
+  /* ---------- scroll progress bar + reveal safety net ---------- */
+  var bar = document.getElementById('scroll-bar');
+  var revealables = document.querySelectorAll('.reveal');
+  var scrollTicking = false;
+  function onScroll(){
+    var h = document.documentElement;
+    var pct = (h.scrollTop) / ((h.scrollHeight - h.clientHeight) || 1) * 100;
+    bar.style.width = pct + '%';
+    // safety net: if a scroll (anchor jump, deep link, reduced-motion browsers)
+    // lands past a .reveal element without it ever intersecting the viewport,
+    // IntersectionObserver never fires for it. Anything already at/above the
+    // fold should just be visible — no animation needed for content the user
+    // has already scrolled past.
+    revealables.forEach(function(el){
+      if(el.classList.contains('in-view')) return;
+      if(el.getBoundingClientRect().top < window.innerHeight) el.classList.add('in-view');
+    });
+  }
+  document.addEventListener('scroll', function(){
+    if(scrollTicking) return;
+    scrollTicking = true;
+    requestAnimationFrame(function(){ onScroll(); scrollTicking = false; });
+  }, {passive:true});
+  onScroll();
+
+  /* ---------- typewriter for prompt lines ---------- */
+  document.querySelectorAll('.prompt[data-type]').forEach(function(el){
+    var text = el.getAttribute('data-type');
+    if(reduceMotion){ el.textContent = text; return; }
+    el.textContent = '';
+    var i = 0;
+    (function tick(){
+      el.textContent = text.slice(0, i);
+      i++;
+      if(i <= text.length) setTimeout(tick, 55);
+    })();
+  });
+
+  /* ---------- reveal on scroll (IntersectionObserver, primary path) ---------- */
+  if('IntersectionObserver' in window && !reduceMotion){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){ e.target.classList.add('in-view'); io.unobserve(e.target); }
+      });
+    }, {threshold:0.15, rootMargin:'0px 0px -40px 0px'});
+    revealables.forEach(function(el){ io.observe(el); });
+  } else {
+    revealables.forEach(function(el){ el.classList.add('in-view'); });
+  }
+
+  /* ---------- count-up stats ---------- */
+  document.querySelectorAll('.count[data-count]').forEach(function(el){
+    var target = parseInt(el.getAttribute('data-count'), 10) || 0;
+    if(reduceMotion){ el.textContent = target; return; }
+    var run = function(){
+      var start = null, dur = 900;
+      function step(ts){
+        if(!start) start = ts;
+        var p = Math.min((ts - start) / dur, 1);
+        el.textContent = Math.round(target * (1 - Math.pow(1 - p, 3)));
+        if(p < 1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+    };
+    if('IntersectionObserver' in window){
+      var io2 = new IntersectionObserver(function(entries){
+        entries.forEach(function(e){ if(e.isIntersecting){ run(); io2.disconnect(); } });
+      }, {threshold:0.6});
+      io2.observe(el);
+    } else { run(); }
+  });
+
+  /* ---------- 3d tilt + cursor spotlight on cards ---------- */
+  document.querySelectorAll('.proj, .g-item').forEach(function(card){
+    card.addEventListener('mousemove', function(ev){
+      var r = card.getBoundingClientRect();
+      var x = ev.clientX - r.left, y = ev.clientY - r.top;
+      card.style.setProperty('--mx', x + 'px');
+      card.style.setProperty('--my', y + 'px');
+      if(reduceMotion) return;
+      var rx = ((y / r.height) - 0.5) * -6;
+      var ry = ((x / r.width) - 0.5) * 6;
+      card.style.transform = 'perspective(700px) rotateX(' + rx + 'deg) rotateY(' + ry + 'deg) translateY(-3px)';
+    });
+    card.addEventListener('mouseleave', function(){
+      card.style.transform = '';
+    });
+  });
+
+  /* ---------- ambient network canvas ---------- */
+  var canvas = document.getElementById('net-bg');
+  var ctx = canvas.getContext('2d');
+  var W, H, nodes, DPR = Math.min(window.devicePixelRatio || 1, 2);
+  var mouse = {x:-9999, y:-9999};
+  var running = !reduceMotion;
+
+  function resize(){
+    W = window.innerWidth; H = window.innerHeight;
+    canvas.width = W * DPR; canvas.height = H * DPR;
+    canvas.style.width = W + 'px'; canvas.style.height = H + 'px';
+    ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+    var density = W < 640 ? 14000 : 9000;
+    var count = Math.min(90, Math.floor((W * H) / density));
+    nodes = [];
+    for(var i = 0; i < count; i++){
+      nodes.push({
+        x: Math.random() * W, y: Math.random() * H,
+        vx: (Math.random() - 0.5) * 0.25, vy: (Math.random() - 0.5) * 0.25
+      });
+    }
+  }
+
+  function draw(){
+    if(!running) return;
+    ctx.clearRect(0, 0, W, H);
+    for(var i = 0; i < nodes.length; i++){
+      var n = nodes[i];
+      n.x += n.vx; n.y += n.vy;
+      if(n.x < 0 || n.x > W) n.vx *= -1;
+      if(n.y < 0 || n.y > H) n.vy *= -1;
+      var dxm = n.x - mouse.x, dym = n.y - mouse.y;
+      var dm = Math.sqrt(dxm*dxm + dym*dym);
+      if(dm < 140){ n.x += dxm / dm * 0.4; n.y += dym / dm * 0.4; }
+    }
+    for(var a = 0; a < nodes.length; a++){
+      for(var b = a + 1; b < nodes.length; b++){
+        var dx = nodes[a].x - nodes[b].x, dy = nodes[a].y - nodes[b].y;
+        var d = Math.sqrt(dx*dx + dy*dy);
+        if(d < 130){
+          ctx.strokeStyle = 'rgba(94,234,212,' + (0.16 * (1 - d / 130)) + ')';
+          ctx.lineWidth = 1;
+          ctx.beginPath();
+          ctx.moveTo(nodes[a].x, nodes[a].y);
+          ctx.lineTo(nodes[b].x, nodes[b].y);
+          ctx.stroke();
+        }
+      }
+      ctx.fillStyle = 'rgba(125,211,252,0.55)';
+      ctx.beginPath();
+      ctx.arc(nodes[a].x, nodes[a].y, 1.6, 0, Math.PI * 2);
+      ctx.fill();
+    }
+    requestAnimationFrame(draw);
+  }
+
+  window.addEventListener('resize', resize);
+  window.addEventListener('mousemove', function(ev){ mouse.x = ev.clientX; mouse.y = ev.clientY; });
+  document.addEventListener('visibilitychange', function(){
+    running = !document.hidden && !reduceMotion;
+    if(running) requestAnimationFrame(draw);
+  });
+
+  resize();
+  if(running) requestAnimationFrame(draw);
+  else { ctx.clearRect(0,0,W,H); }
+})();
+</script>
 
 </body>
 </html>
