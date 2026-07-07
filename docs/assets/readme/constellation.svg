@@ -1,0 +1,240 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 940 940" font-family="'SF Mono','Cascadia Code','JetBrains Mono',Menlo,Consolas,monospace" role="img" aria-label="Skill constellation: security, cloud, AI and agents, languages">
+  <defs>
+    <radialGradient id="coreGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#22d3ee" stop-opacity=".38"/>
+      <stop offset="60%" stop-color="#a78bfa" stop-opacity=".16"/>
+      <stop offset="100%" stop-color="#a78bfa" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="coreText" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#22d3ee"/>
+      <stop offset="55%" stop-color="#a78bfa"/>
+      <stop offset="100%" stop-color="#f472b6"/>
+    </linearGradient>
+    <style>
+      text{user-select:none;}
+      .ringpath{fill:none;stroke-dasharray:2 7;stroke-linecap:round;}
+      .ringA{transform-box:view-box;transform-origin:470px 470px;animation:spinCW 46s linear infinite;}
+      .ringB{transform-box:view-box;transform-origin:470px 470px;animation:spinCCW 62s linear infinite;}
+      .ringC{transform-box:view-box;transform-origin:470px 470px;animation:spinCW 78s linear infinite;}
+      .ringD{transform-box:view-box;transform-origin:470px 470px;animation:spinCCW 100s linear infinite;}
+      @keyframes spinCW{from{transform:rotate(0deg);}to{transform:rotate(360deg);}}
+      @keyframes spinCCW{from{transform:rotate(0deg);}to{transform:rotate(-360deg);}}
+      .counter-a{transform-box:fill-box;transform-origin:center;animation:spinCCW 46s linear infinite;}
+      .counter-b{transform-box:fill-box;transform-origin:center;animation:spinCW 62s linear infinite;}
+      .counter-c{transform-box:fill-box;transform-origin:center;animation:spinCCW 78s linear infinite;}
+      .counter-d{transform-box:fill-box;transform-origin:center;animation:spinCW 100s linear infinite;}
+      .core-pulse{animation:pulse 3.4s ease-in-out infinite;transform-box:fill-box;transform-origin:center;}
+      @keyframes pulse{0%,100%{opacity:.75;transform:scale(1);}50%{opacity:1;transform:scale(1.045);}}
+      @media (prefers-reduced-motion: reduce){
+        .ringA,.ringB,.ringC,.ringD,.counter-a,.counter-b,.counter-c,.counter-d,.core-pulse{animation:none;}
+      }
+    </style>
+  </defs>
+
+  <rect width="940" height="940" fill="#04050a"/>
+  <circle cx="470" cy="470" r="410" fill="url(#coreGlow)"/>
+
+  <!-- static orbit guide rings -->
+  <circle class="ringpath" cx="470" cy="470" r="130" stroke="#f472b6" stroke-opacity=".3"/>
+  <circle class="ringpath" cx="470" cy="470" r="210" stroke="#22d3ee" stroke-opacity=".28"/>
+  <circle class="ringpath" cx="470" cy="470" r="290" stroke="#a78bfa" stroke-opacity=".26"/>
+  <circle class="ringpath" cx="470" cy="470" r="370" stroke="#eef2f8" stroke-opacity=".16"/>
+
+  <!-- rotating tech rings -->
+  <g class="ringA">
+      <g transform="translate(470 340)">
+        <g class="counter-a">
+          <rect x="-54.0" y="-15" width="108" height="30" rx="14.5" fill="rgba(244,113,182,0.14)" stroke="rgba(244,113,182,0.65)" stroke-width="1.1"/>
+          <text x="0" y="5.5" text-anchor="middle" font-size="15.5" font-family="monospace" fill="#ffd9ec" font-weight="600">Zero Trust</text>
+        </g>
+      </g>
+      <g transform="translate(593.6 429.8)">
+        <g class="counter-a">
+          <rect x="-58.3" y="-15" width="116.6" height="30" rx="14.5" fill="rgba(244,113,182,0.14)" stroke="rgba(244,113,182,0.65)" stroke-width="1.1"/>
+          <text x="0" y="5.5" text-anchor="middle" font-size="15.5" font-family="monospace" fill="#ffd9ec" font-weight="600">OAuth2/OIDC</text>
+        </g>
+      </g>
+      <g transform="translate(546.4 575.2)">
+        <g class="counter-a">
+          <rect x="-49.7" y="-15" width="99.4" height="30" rx="14.5" fill="rgba(244,113,182,0.14)" stroke="rgba(244,113,182,0.65)" stroke-width="1.1"/>
+          <text x="0" y="5.5" text-anchor="middle" font-size="15.5" font-family="monospace" fill="#ffd9ec" font-weight="600">RBAC/ABAC</text>
+        </g>
+      </g>
+      <g transform="translate(393.6 575.2)">
+        <g class="counter-a">
+          <rect x="-41.1" y="-15" width="82.2" height="30" rx="14.5" fill="rgba(244,113,182,0.14)" stroke="rgba(244,113,182,0.65)" stroke-width="1.1"/>
+          <text x="0" y="5.5" text-anchor="middle" font-size="15.5" font-family="monospace" fill="#ffd9ec" font-weight="600">EntraID</text>
+        </g>
+      </g>
+      <g transform="translate(346.4 429.8)">
+        <g class="counter-a">
+          <rect x="-36.8" y="-15" width="73.6" height="30" rx="14.5" fill="rgba(244,113,182,0.14)" stroke="rgba(244,113,182,0.65)" stroke-width="1.1"/>
+          <text x="0" y="5.5" text-anchor="middle" font-size="15.5" font-family="monospace" fill="#ffd9ec" font-weight="600">Apigee</text>
+        </g>
+      </g>
+  </g>
+  <g class="ringB">
+      <g transform="translate(470 260)">
+        <g class="counter-b">
+          <rect x="-23.9" y="-15" width="47.8" height="30" rx="14.5" fill="rgba(34,211,238,0.14)" stroke="rgba(34,211,238,0.65)" stroke-width="1.1"/>
+          <text x="0" y="5.5" text-anchor="middle" font-size="15.5" font-family="monospace" fill="#c8f7ff" font-weight="600">AWS</text>
+        </g>
+      </g>
+      <g transform="translate(651.9 365)">
+        <g class="counter-b">
+          <rect x="-32.5" y="-15" width="65" height="30" rx="14.5" fill="rgba(34,211,238,0.14)" stroke="rgba(34,211,238,0.65)" stroke-width="1.1"/>
+          <text x="0" y="5.5" text-anchor="middle" font-size="15.5" font-family="monospace" fill="#c8f7ff" font-weight="600">Azure</text>
+        </g>
+      </g>
+      <g transform="translate(651.9 575)">
+        <g class="counter-b">
+          <rect x="-54.0" y="-15" width="108" height="30" rx="14.5" fill="rgba(34,211,238,0.14)" stroke="rgba(34,211,238,0.65)" stroke-width="1.1"/>
+          <text x="0" y="5.5" text-anchor="middle" font-size="15.5" font-family="monospace" fill="#c8f7ff" font-weight="600">Kubernetes</text>
+        </g>
+      </g>
+      <g transform="translate(470 680)">
+        <g class="counter-b">
+          <rect x="-36.8" y="-15" width="73.6" height="30" rx="14.5" fill="rgba(34,211,238,0.14)" stroke="rgba(34,211,238,0.65)" stroke-width="1.1"/>
+          <text x="0" y="5.5" text-anchor="middle" font-size="15.5" font-family="monospace" fill="#c8f7ff" font-weight="600">Docker</text>
+        </g>
+      </g>
+      <g transform="translate(288.1 575)">
+        <g class="counter-b">
+          <rect x="-49.7" y="-15" width="99.4" height="30" rx="14.5" fill="rgba(34,211,238,0.14)" stroke="rgba(34,211,238,0.65)" stroke-width="1.1"/>
+          <text x="0" y="5.5" text-anchor="middle" font-size="15.5" font-family="monospace" fill="#c8f7ff" font-weight="600">Snowflake</text>
+        </g>
+      </g>
+      <g transform="translate(288.1 365)">
+        <g class="counter-b">
+          <rect x="-23.9" y="-15" width="47.8" height="30" rx="14.5" fill="rgba(34,211,238,0.14)" stroke="rgba(34,211,238,0.65)" stroke-width="1.1"/>
+          <text x="0" y="5.5" text-anchor="middle" font-size="15.5" font-family="monospace" fill="#c8f7ff" font-weight="600">IaC</text>
+        </g>
+      </g>
+  </g>
+  <g class="ringC">
+      <g transform="translate(615 218.9)">
+        <g class="counter-c">
+          <rect x="-58.3" y="-15" width="116.6" height="30" rx="14.5" fill="rgba(167,139,250,0.14)" stroke="rgba(167,139,250,0.65)" stroke-width="1.1"/>
+          <text x="0" y="5.5" text-anchor="middle" font-size="15.5" font-family="monospace" fill="#e3d9ff" font-weight="600">Claude Code</text>
+        </g>
+      </g>
+      <g transform="translate(760 470)">
+        <g class="counter-c">
+          <rect x="-36.8" y="-15" width="73.6" height="30" rx="14.5" fill="rgba(167,139,250,0.14)" stroke="rgba(167,139,250,0.65)" stroke-width="1.1"/>
+          <text x="0" y="5.5" text-anchor="middle" font-size="15.5" font-family="monospace" fill="#e3d9ff" font-weight="600">CrewAI</text>
+        </g>
+      </g>
+      <g transform="translate(615 721.1)">
+        <g class="counter-c">
+          <rect x="-36.8" y="-15" width="73.6" height="30" rx="14.5" fill="rgba(167,139,250,0.14)" stroke="rgba(167,139,250,0.65)" stroke-width="1.1"/>
+          <text x="0" y="5.5" text-anchor="middle" font-size="15.5" font-family="monospace" fill="#e3d9ff" font-weight="600">Ollama</text>
+        </g>
+      </g>
+      <g transform="translate(325 721.1)">
+        <g class="counter-c">
+          <rect x="-54.0" y="-15" width="108" height="30" rx="14.5" fill="rgba(167,139,250,0.14)" stroke="rgba(167,139,250,0.65)" stroke-width="1.1"/>
+          <text x="0" y="5.5" text-anchor="middle" font-size="15.5" font-family="monospace" fill="#e3d9ff" font-weight="600">RAG/Qdrant</text>
+        </g>
+      </g>
+      <g transform="translate(180 470)">
+        <g class="counter-c">
+          <rect x="-66.9" y="-15" width="133.8" height="30" rx="14.5" fill="rgba(167,139,250,0.14)" stroke="rgba(167,139,250,0.65)" stroke-width="1.1"/>
+          <text x="0" y="5.5" text-anchor="middle" font-size="15.5" font-family="monospace" fill="#e3d9ff" font-weight="600">OpenTelemetry</text>
+        </g>
+      </g>
+      <g transform="translate(325 218.9)">
+        <g class="counter-c">
+          <rect x="-41.1" y="-15" width="82.2" height="30" rx="14.5" fill="rgba(167,139,250,0.14)" stroke="rgba(167,139,250,0.65)" stroke-width="1.1"/>
+          <text x="0" y="5.5" text-anchor="middle" font-size="15.5" font-family="monospace" fill="#e3d9ff" font-weight="600">FastAPI</text>
+        </g>
+      </g>
+  </g>
+  <g class="ringD">
+      <g transform="translate(470 100)">
+        <g class="counter-d">
+          <rect x="-28.2" y="-15" width="56.4" height="30" rx="14.5" fill="rgba(238,242,248,0.09)" stroke="rgba(238,242,248,0.4)" stroke-width="1.1"/>
+          <text x="0" y="5.5" text-anchor="middle" font-size="15.5" font-family="monospace" fill="#eef2f8" font-weight="600">Java</text>
+        </g>
+      </g>
+      <g transform="translate(670 158.7)">
+        <g class="counter-d">
+          <rect x="-36.8" y="-15" width="73.6" height="30" rx="14.5" fill="rgba(238,242,248,0.09)" stroke="rgba(238,242,248,0.4)" stroke-width="1.1"/>
+          <text x="0" y="5.5" text-anchor="middle" font-size="15.5" font-family="monospace" fill="#eef2f8" font-weight="600">Python</text>
+        </g>
+      </g>
+      <g transform="translate(806.6 316.3)">
+        <g class="counter-d">
+          <rect x="-54.0" y="-15" width="108" height="30" rx="14.5" fill="rgba(238,242,248,0.09)" stroke="rgba(238,242,248,0.4)" stroke-width="1.1"/>
+          <text x="0" y="5.5" text-anchor="middle" font-size="15.5" font-family="monospace" fill="#eef2f8" font-weight="600">TypeScript</text>
+        </g>
+      </g>
+      <g transform="translate(836.2 522.7)">
+        <g class="counter-d">
+          <rect x="-19.6" y="-15" width="39.2" height="30" rx="14.5" fill="rgba(238,242,248,0.09)" stroke="rgba(238,242,248,0.4)" stroke-width="1.1"/>
+          <text x="0" y="5.5" text-anchor="middle" font-size="15.5" font-family="monospace" fill="#eef2f8" font-weight="600">Go</text>
+        </g>
+      </g>
+      <g transform="translate(749.6 712.3)">
+        <g class="counter-d">
+          <rect x="-32.5" y="-15" width="65" height="30" rx="14.5" fill="rgba(238,242,248,0.09)" stroke="rgba(238,242,248,0.4)" stroke-width="1.1"/>
+          <text x="0" y="5.5" text-anchor="middle" font-size="15.5" font-family="monospace" fill="#eef2f8" font-weight="600">Swift</text>
+        </g>
+      </g>
+      <g transform="translate(574.2 825)">
+        <g class="counter-d">
+          <rect x="-28.2" y="-15" width="56.4" height="30" rx="14.5" fill="rgba(238,242,248,0.09)" stroke="rgba(238,242,248,0.4)" stroke-width="1.1"/>
+          <text x="0" y="5.5" text-anchor="middle" font-size="15.5" font-family="monospace" fill="#eef2f8" font-weight="600">Ruby</text>
+        </g>
+      </g>
+      <g transform="translate(365.8 825)">
+        <g class="counter-d">
+          <rect x="-19.6" y="-15" width="39.2" height="30" rx="14.5" fill="rgba(238,242,248,0.09)" stroke="rgba(238,242,248,0.4)" stroke-width="1.1"/>
+          <text x="0" y="5.5" text-anchor="middle" font-size="15.5" font-family="monospace" fill="#eef2f8" font-weight="600">C#</text>
+        </g>
+      </g>
+      <g transform="translate(190.4 712.3)">
+        <g class="counter-d">
+          <rect x="-28.2" y="-15" width="56.4" height="30" rx="14.5" fill="rgba(238,242,248,0.09)" stroke="rgba(238,242,248,0.4)" stroke-width="1.1"/>
+          <text x="0" y="5.5" text-anchor="middle" font-size="15.5" font-family="monospace" fill="#eef2f8" font-weight="600">Bash</text>
+        </g>
+      </g>
+      <g transform="translate(103.8 522.7)">
+        <g class="counter-d">
+          <rect x="-32.5" y="-15" width="65" height="30" rx="14.5" fill="rgba(238,242,248,0.09)" stroke="rgba(238,242,248,0.4)" stroke-width="1.1"/>
+          <text x="0" y="5.5" text-anchor="middle" font-size="15.5" font-family="monospace" fill="#eef2f8" font-weight="600">React</text>
+        </g>
+      </g>
+      <g transform="translate(133.4 316.3)">
+        <g class="counter-d">
+          <rect x="-41.1" y="-15" width="82.2" height="30" rx="14.5" fill="rgba(238,242,248,0.09)" stroke="rgba(238,242,248,0.4)" stroke-width="1.1"/>
+          <text x="0" y="5.5" text-anchor="middle" font-size="15.5" font-family="monospace" fill="#eef2f8" font-weight="600">Next.js</text>
+        </g>
+      </g>
+      <g transform="translate(270 158.7)">
+        <g class="counter-d">
+          <rect x="-36.8" y="-15" width="73.6" height="30" rx="14.5" fill="rgba(238,242,248,0.09)" stroke="rgba(238,242,248,0.4)" stroke-width="1.1"/>
+          <text x="0" y="5.5" text-anchor="middle" font-size="15.5" font-family="monospace" fill="#eef2f8" font-weight="600">Vue.js</text>
+        </g>
+      </g>
+  </g>
+
+  <!-- core -->
+  <g class="core-pulse">
+    <circle cx="470" cy="470" r="98" fill="#080b14" stroke="url(#coreText)" stroke-width="1.6"/>
+  </g>
+  <text x="470" y="450" text-anchor="middle" font-size="15" letter-spacing="2" fill="#8e99ad">10+ YEARS</text>
+  <text x="470" y="478" text-anchor="middle" font-size="21" font-weight="800" letter-spacing="1" fill="url(#coreText)">GENERALIST</text>
+  <text x="470" y="502" text-anchor="middle" font-size="13.5" letter-spacing="1.5" fill="#8e99ad">4 DOMAINS · 28 TECH</text>
+
+  <!-- legend -->
+  <g font-size="14" font-weight="600">
+    <circle cx="66" cy="878" r="6" fill="#f472b6"/>
+    <text x="82" y="883" fill="#eef2f8">Security &amp; Identity</text>
+    <circle cx="266" cy="878" r="6" fill="#22d3ee"/>
+    <text x="282" y="883" fill="#eef2f8">Cloud &amp; Platform</text>
+    <circle cx="452" cy="878" r="6" fill="#a78bfa"/>
+    <text x="468" y="883" fill="#eef2f8">AI &amp; Agents</text>
+    <circle cx="608" cy="878" r="6" fill="#eef2f8"/>
+    <text x="624" y="883" fill="#eef2f8">Languages &amp; Frontend</text>
+  </g>
+</svg>
