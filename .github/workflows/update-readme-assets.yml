@@ -1,0 +1,36 @@
+name: Update README assets
+
+on:
+  schedule:
+    - cron: '0 18 * * *' # 03:00 JST daily
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  regenerate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Regenerate README SVGs
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: node scripts/generate-readme-assets.mjs
+
+      - name: Commit if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          if git diff --quiet -- docs/assets/readme/; then
+            echo "No changes."
+            exit 0
+          fi
+          git add docs/assets/readme/activity.svg docs/assets/readme/langs.svg docs/assets/readme/timeline.svg docs/assets/readme/oss-impact.svg
+          git commit -m "chore: daily refresh of README GitHub-activity assets"
+          git push

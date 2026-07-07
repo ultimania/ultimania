@@ -34,13 +34,17 @@ Not a specialist who learned to fake breadth — a generalist who happens to be 
 
 <div align="center">
 
-<img src="./docs/assets/readme/activity.svg" alt="One year of GitHub contribution activity — 4,825 contributions, 27-day longest streak" width="100%">
+<img src="./docs/assets/readme/activity.svg" alt="One year of GitHub activity distilled — total contributions, longest streak, and days shipped" width="100%">
+
+<img src="./docs/assets/readme/timeline.svg" alt="Timeline of first public repository per language, 2016 to 2026" width="100%">
 
 <img src="./docs/assets/readme/langs.svg" alt="Public repositories by primary language, computed live from the GitHub API" width="100%">
 
+<img src="./docs/assets/readme/oss-impact.svg" alt="redmine_budget OSS plugin real-world impact statistics" width="100%">
+
 </div>
 
-<sub>Third-party stat badges go down more often than my production systems do, so these are self-rendered straight from the GitHub API — no dependency on someone else's free-tier deployment.</sub>
+<sub>Third-party stat badges go down more often than my production systems do, so these are self-rendered straight from the GitHub API — no dependency on someone else's free-tier deployment. A GitHub Action regenerates all four daily.</sub>
 
 ## 🧪 The Lab — what I build when nobody's paying
 
