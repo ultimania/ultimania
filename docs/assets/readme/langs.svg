@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 940 504" font-family="'SF Mono','Cascadia Code','JetBrains Mono',Menlo,Consolas,monospace" role="img" aria-label="Public repositories by primary language, computed live from the GitHub API">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 940 458" font-family="'SF Mono','Cascadia Code','JetBrains Mono',Menlo,Consolas,monospace" role="img" aria-label="Public repositories by primary language, computed live from the GitHub API">
   <defs>
     <style>
       .pulse{animation:blink 2.6s ease-in-out infinite;}
@@ -13,13 +13,13 @@
       @media (prefers-reduced-motion: reduce){.bar{animation:none;transform:scaleX(1);opacity:.85;}}
     </style>
   </defs>
-  <rect width="940" height="504" rx="14" fill="#04050a"/>
-  <rect x=".5" y=".5" width="939" height="503" rx="14" fill="none" stroke="#ffffff" stroke-opacity=".08"/>
+  <rect width="940" height="458" rx="14" fill="#04050a"/>
+  <rect x=".5" y=".5" width="939" height="457" rx="14" fill="none" stroke="#ffffff" stroke-opacity=".08"/>
   <circle class="pulse" cx="884" cy="20" r="4" fill="#22d3ee"/>
   <text x="866" y="25" text-anchor="end" font-size="10.5" letter-spacing="1.2" fill="#8e99ad">GITHUB API</text>
 
   <text x="30" y="46" font-size="21" font-weight="800" fill="#eef2f8">Public repos, by primary language</text>
-  <text x="30" y="70" font-size="13" fill="#8e99ad">17 language-detected repos of 19 public · counted by GitHub's own per-repo "primary language" field</text>
+  <text x="30" y="70" font-size="13" fill="#8e99ad">16 language-detected repos of 18 public · counted by GitHub's own per-repo "primary language" field</text>
 
     <text x="180" y="117" text-anchor="end" font-size="16" font-weight="600" fill="#eef2f8">Python</text>
     <rect x="200" y="96" width="660" height="28" rx="6" fill="#ffffff" opacity="0.04"/>
@@ -55,10 +55,5 @@
     <rect x="200" y="372" width="660" height="28" rx="6" fill="#ffffff" opacity="0.04"/>
     <rect class="bar" style="animation-delay:0.72s" x="200" y="372" width="165.0" height="28" rx="6" fill="#22d3ee" opacity="0.85"/>
     <text x="379" y="393" font-size="14" font-family="monospace" fill="#8e99ad">1 repo</text>
-
-    <text x="180" y="439" text-anchor="end" font-size="16" font-weight="600" fill="#eef2f8">PHP</text>
-    <rect x="200" y="418" width="660" height="28" rx="6" fill="#ffffff" opacity="0.04"/>
-    <rect class="bar" style="animation-delay:0.84s" x="200" y="418" width="165.0" height="28" rx="6" fill="#a78bfa" opacity="0.85"/>
-    <text x="379" y="439" font-size="14" font-family="monospace" fill="#8e99ad">1 repo</text>
-  <text x="30" y="474" font-size="12" fill="#5b6577">github.com/ultimania · fetched via GitHub REST API · refreshed daily</text>
+  <text x="30" y="428" font-size="12" fill="#5b6577">github.com/ultimania · fetched via GitHub REST API · refreshed daily</text>
 </svg>
